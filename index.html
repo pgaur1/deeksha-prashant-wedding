@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deeksha &amp; Prashant — Wedding Invitation">
+<meta property="og:description" content="10 February 2027 • Kotdwar • Tap the invitation card to open your interactive wedding invite.">
+<meta property="og:image" content="https://YOUR-SITE-NAME.netlify.app/invite-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deeksha &amp; Prashant — Wedding Invitation">
+<meta name="twitter:description" content="10 February 2027 • Kotdwar • Tap the invitation card to open your interactive wedding invite.">
+<meta name="twitter:image" content="https://YOUR-SITE-NAME.netlify.app/invite-preview.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deeksha & Prashant — Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy: #6D1426;
+    --burgundy-deep: #4A0B18;
+    --rose-blush: #F8ECEE;
+    --rose-tint: #F2D7DC;
+    --cream-paper: #FDF7F7;
+    --gold: #C89B54;
+    --gold-bright: #E5C17B;
+    --gold-dark: #9B7130;
+    --text-dark: #3B1219;
+    --text-muted: #7C5158;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    background: #1C0A0E;
+    color: var(--text-dark);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* Mobile viewport shell */
+  .mobile-frame {
+    max-width: 440px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #FAF0F1 0%, #F6E4E7 45%, #FAF0F2 100%);
+    position: relative;
+    overflow-x: hidden;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.65);
+  }
+
+  /* ================= FALLING ROSE PETALS CANVAS ================= */
+  #petalsCanvas {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 440px;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  /* Top floral garland SVG banner */
+  .top-garland {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 110px;
+    pointer-events: none;
+    z-index: 15;
+    overflow: hidden;
+  }
+
+  /* ================= 1. 3D BOOK COVER (0:00 - 0:02) ================= */
+  .book-stage {
+    position: fixed;
+    inset: 0;
+    max-width: 440px;
+    margin: 0 auto;
+    z-index: 200;
+    background: radial-gradient(circle at center, #F5DDE2 0%, #E8C5CC 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 1800px;
+    transition: opacity 0.85s ease 0.55s, visibility 0.85s ease 0.55s;
+  }
+
+  .book-stage.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .book-container {
+    width: 280px;
+    height: 390px;
+    position: relative;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .book-stage.opening .book-container {
+    transform: scale(1.15);
+  }
+
+  /* Inside right page (white floral page seen at 0:01) */
+  .book-inside-page {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, #FFFDFD 0%, #F7E8EB 100%);
+    border-radius: 6px 14px 14px 6px;
+    box-shadow: 0 22px 45px rgba(74, 11, 24, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(200, 155, 84, 0.35);
+    overflow: hidden;
+  }
+
+  /* Front Burgundy Cover */
+  .book-front-cover {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 35% 30%, #83192E 0%, var(--burgundy) 60%, var(--burgundy-deep) 100%);
+    border-radius: 6px 14px 14px 6px;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 1.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+    box-shadow: 0 24px 48px rgba(45, 6, 14, 0.45), inset 4px 0 12px rgba(255,255,255,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    backface-visibility: hidden;
+  }
+
+  .book-stage.opening .book-front-cover {
+    transform: rotateY(-165deg);
+  }
+
+  .cover-gold-frame {
+    position: absolute;
+    inset: 14px;
+    border: 1.5px solid var(--gold-bright);
+    pointer-events: none;
+  }
+
+  .cover-gold-frame::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 0.75px solid rgba(229, 193, 123, 0.55);
+  }
+
+  .ganesh-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    border: 1.2px solid var(--gold-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    box-shadow: 0 0 24px rgba(229, 193, 123, 0.25);
+  }
+
+  .cover-main-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #FFF4DC;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .cover-sub-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3.5px;
+    color: var(--gold-bright);
+    text-transform: uppercase;
+  }
+
+  .tap-hint-wrap {
+    margin-top: 34px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .pulse-dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(109, 20, 38, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    animation: ringPulse 2s infinite;
+  }
+
+  .pulse-dot span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--burgundy);
+    display: block;
+  }
+
+  @keyframes ringPulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(109, 20, 38, 0.4); }
+    70% { transform: scale(1.06); box-shadow: 0 0 0 12px rgba(109, 20, 38, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(109, 20, 38, 0); }
+  }
+
+  .tap-hint-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.8px;
+    color: var(--burgundy);
+    text-transform: uppercase;
+  }
+
+  /* ================= 2. HERO GOLD ARCH SECTION (0:02 - 0:06) ================= */
+  .hero-section {
+    padding: 36px 20px 28px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-arch {
+    position: relative;
+    width: 100%;
+    min-height: 555px;
+    border-radius: 195px 195px 24px 24px;
+    border: 1.5px solid rgba(200, 155, 84, 0.75);
+    padding: 34px 20px 32px;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,250,250,0.88) 0%, rgba(248,233,236,0.92) 100%);
+    box-shadow: 0 18px 40px rgba(109, 20, 38, 0.12);
+  }
+
+  /* Soft blurred slowly zooming romantic silhouette background inside arch */
+  .arch-zoom-bg {
+    position: absolute;
+    inset: -12%;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.72) 0%, rgba(244, 217, 222, 0.55) 55%, rgba(214, 175, 183, 0.45) 100%);
+    filter: blur(8px);
+    animation: heroSlowZoom 16s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  /* Artistic soft couple watercolor backdrop SVG inside arch */
+  .arch-silhouette-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.22;
+    filter: blur(5px);
+    animation: heroSlowZoom 16s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  @keyframes heroSlowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.13); }
+  }
+
+  .arch-inner-line {
+    position: absolute;
+    inset: 8px;
+    border-radius: 187px 187px 18px 18px;
+    border: 0.8px solid rgba(200, 155, 84, 0.5);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .arch-body {
+    position: relative;
+    z-index: 2;
+  }
+
+  .arch-crest {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(200, 155, 84, 0.65);
+    background: rgba(255, 255, 255, 0.65);
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .together-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  /* Typewriter & Staggered Fade Reveal */
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 600;
+    line-height: 1.05;
+    color: var(--burgundy);
+    letter-spacing: 0.5px;
+    min-height: 55px;
+  }
+
+  .typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 40px;
+    background: var(--burgundy);
+    vertical-align: middle;
+    margin-left: 2px;
+    animation: blinkCursor 0.75s infinite;
+  }
+
+  .typing-cursor.done {
+    display: none;
+  }
+
+  @keyframes blinkCursor {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .fade-reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .relation-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .parents-line {
+    font-size: 15.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-top: 3px;
+    line-height: 1.35;
+  }
+
+  .ampersand-ornament {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--gold-dark);
+    margin: 12px 0 8px;
+  }
+
+  .pleasure-text {
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--burgundy);
+    margin-top: 22px;
+  }
+
+  .scroll-cue {
+    margin-top: 22px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .scroll-cue span {
+    display: block;
+    font-size: 14px;
+    margin-top: 3px;
+    animation: bounceDown 1.8s infinite;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  /* ================= 3. SAVE THE DATE — PULL TO REVEAL TASSEL (0:07 - 0:14) ================= */
+  .reveal-section {
+    padding: 36px 22px 42px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .kicker-small {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 3.2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .serif-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--burgundy);
+    margin-bottom: 24px;
+  }
+
+  /* Interactive Scroll / Tassel Curtain Widget */
+  .scroll-curtain-wrap {
+    position: relative;
+    max-width: 340px;
+    margin: 0 auto;
+    user-select: none;
+    touch-action: pan-y;
+  }
+
+  .scroll-rod {
+    height: 18px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #F3DFA8 0%, #C7994B 52%, #9A6F28 100%);
+    box-shadow: 0 6px 14px rgba(92, 57, 14, 0.28);
+    position: relative;
+    z-index: 4;
+  }
+
+  .scroll-rod::before,
+  .scroll-rod::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    width: 14px;
+    height: 24px;
+    border-radius: 6px;
+    background: radial-gradient(circle at 30% 30%, #F8E6B8, #A8792D);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+
+  .scroll-rod::before { left: -4px; }
+  .scroll-rod::after { right: -4px; }
+
+  .scroll-parchment {
+    width: 90%;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #FFFDFC 0%, #FDF3F4 100%);
+    border-left: 1px solid rgba(200, 155, 84, 0.45);
+    border-right: 1px solid rgba(200, 155, 84, 0.45);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, padding 0.75s ease;
+    padding: 0 18px;
+    position: relative;
+    box-shadow: inset 0 12px 20px -12px rgba(109, 20, 38, 0.16);
+  }
+
+  .scroll-parchment.unrolled {
+    max-height: 310px;
+    opacity: 1;
+    padding: 26px 18px 28px;
+  }
+
+  .parchment-inner-border {
+    border: 1px solid rgba(200, 155, 84, 0.45);
+    padding: 18px 12px;
+    position: relative;
+  }
+
+  .date-day {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .date-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--burgundy);
+  }
+
+  .date-month {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--burgundy);
+    margin-top: 2px;
+  }
+
+  .date-year {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    margin: 4px 0 10px;
+  }
+
+  .date-venue-sub {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Hanging Tassel Handle */
+  .tassel-handle {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: grab;
+    margin-top: -2px;
+    position: relative;
+    z-index: 5;
+    transition: transform 0.25s ease;
+  }
+
+  .tassel-handle:active {
+    cursor: grabbing;
+    transform: translateY(10px);
+  }
+
+  .tassel-knot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #F2D89B, #9E732B);
+    border: 1px solid #7C5619;
+  }
+
+  .tassel-cap {
+    width: 18px;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 4px 4px 2px 2px;
+    margin-top: -2px;
+  }
+
+  .tassel-threads {
+    display: flex;
+    gap: 2px;
+    margin-top: 1px;
+  }
+
+  .tassel-threads i {
+    display: block;
+    width: 2.5px;
+    height: 36px;
+    background: linear-gradient(180deg, var(--burgundy) 0%, #A92740 100%);
+    border-radius: 0 0 2px 2px;
+  }
+
+  .tassel-prompt {
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    color: var(--text-muted);
+    animation: bounceDown 1.6s infinite;
+  }
+
+  /* Confetti burst container */
+  .confetti-layer {
+    position: absolute;
+    inset: -30px;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 20;
+  }
+
+  .confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    opacity: 0;
+  }
+
+  /* Countdown & Calendar Bar */
+  .countdown-wrap {
+    margin-top: 24px;
+    opacity: 0.35;
+    transform: translateY(8px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .countdown-wrap.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .see-you-line {
+    font-size: 16px;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+  }
+
+  .countdown-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .cd-unit {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--burgundy);
+  }
+
+  .cd-lbl {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8.5px;
+    letter-spacing: 1.2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .cd-sep {
+    color: var(--gold);
+    font-size: 10px;
+  }
+
+  .add-cal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
+    border-radius: 999px;
+    border: 1px solid rgba(109, 20, 38, 0.35);
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--burgundy);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(109, 20, 38, 0.06);
+  }
+
+  /* ================= 4. 3D COVERFLOW WEDDING FESTIVITIES (0:14 - 0:26) ================= */
+  .festivities-section {
+    padding: 34px 0 36px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .coverflow-viewport {
+    position: relative;
+    width: 100%;
+    height: 365px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    touch-action: pan-y;
+    margin-top: 6px;
+  }
+
+  .cf-card {
+    position: absolute;
+    width: 245px;
+    height: 335px;
+    border-radius: 22px;
+    background: #FFFDFD;
+    box-shadow: 0 18px 38px rgba(59, 18, 25, 0.16);
+    overflow: hidden;
+    transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.48s ease, filter 0.48s ease;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+  }
+
+  .cf-card-top {
+    height: 128px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .cf-card-top::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: linear-gradient(180deg, transparent 0%, #FFFDFD 100%);
+  }
+
+  .cf-icon-badge {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    position: relative;
+    z-index: 2;
+    margin-top: 26px;
+  }
+
+  .cf-card-body {
+    padding: 8px 16px 18px;
+    text-align: center;
+  }
+
+  .cf-date-time {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .cf-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.15;
+    margin-bottom: 4px;
+  }
+
+  .cf-venue {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+
+  .cf-dress-box {
+    background: #FAF4F5;
+    border: 1px solid rgba(200, 155, 84, 0.3);
+    border-radius: 12px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .cf-swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+  }
+
+  .cf-dress-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 7.5px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+  }
+
+  .cf-dress-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .cf-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .cf-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(109, 20, 38, 0.25);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .cf-dot.active {
+    width: 18px;
+    border-radius: 999px;
+    background: var(--burgundy);
+  }
+
+  .swipe-caption {
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ================= 5. "OUR STORY / BLESSINGS" ARCH CAROUSEL (0:27 - 0:29) ================= */
+  .story-section {
+    padding: 32px 0 36px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .story-viewport {
+    position: relative;
+    width: 100%;
+    height: 295px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  .story-arch-card {
+    position: absolute;
+    width: 205px;
+    height: 265px;
+    border-radius: 105px 105px 18px 18px;
+    background: #FFFDFD;
+    padding: 7px;
+    box-shadow: 0 14px 32px rgba(59, 18, 25, 0.16);
+    border: 1px solid rgba(200, 155, 84, 0.55);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .story-arch-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 98px 98px 13px 13px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 14px 10px;
+  }
+
+  .story-pill {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 253, 253, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--burgundy);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  /* ================= 6. GRAND PRITIBHOJ / RECEPTION CARD (0:30 - 0:31) ================= */
+  .reception-section {
+    padding: 20px 22px 34px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .grand-card {
+    background: radial-gradient(circle at top, #7E182D 0%, var(--burgundy) 60%, var(--burgundy-deep) 100%);
+    border-radius: 22px;
+    padding: 32px 20px;
+    text-align: center;
+    color: #FFF7F8;
+    position: relative;
+    box-shadow: 0 20px 42px rgba(74, 11, 24, 0.32);
+  }
+
+  .grand-card-border {
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(229, 193, 123, 0.55);
+    border-radius: 15px;
+    pointer-events: none;
+  }
+
+  .grand-kicker {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 8px;
+  }
+
+  .grand-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 600;
+    color: #FFFDFD;
+    margin-bottom: 12px;
+  }
+
+  .grand-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .grand-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    font-weight: 600;
+    color: #FFFDFD;
+    margin-bottom: 6px;
+  }
+
+  .grand-sub {
+    font-size: 14.5px;
+    color: rgba(255, 247, 248, 0.85);
+    line-height: 1.45;
+    margin-bottom: 16px;
+  }
+
+  .grand-dress-pill {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(229, 193, 123, 0.6);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+
+  /* ================= 7. HOW TO REACH + MAP + DIRECTIONS (0:31 - 0:35) ================= */
+  .location-section {
+    padding: 24px 22px 46px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .map-preview-card {
+    display: block;
+    background: #F4EFEA;
+    border-radius: 18px;
+    border: 1px solid rgba(200, 155, 84, 0.45);
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(59, 18, 25, 0.1);
+    text-decoration: none;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .venue-big-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--burgundy);
+    margin-bottom: 4px;
+  }
+
+  .venue-full-addr {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.45;
+  }
+
+  .dir-btn-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .btn-dir-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 13px 12px;
+    border-radius: 999px;
+    background: var(--burgundy);
+    color: #FFFDFD;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(109, 20, 38, 0.25);
+  }
+
+  .btn-dir-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 13px 12px;
+    border-radius: 999px;
+    background: #FFFDFD;
+    color: var(--burgundy);
+    border: 1px solid rgba(109, 20, 38, 0.35);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .family-footer {
+    margin-top: 34px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(200, 155, 84, 0.35);
+    text-align: center;
+  }
+
+  .family-footer p {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+
+  .family-footer strong {
+    color: var(--burgundy);
+  }
+
+  .rsvp-call {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 9px 20px;
+    border-radius: 999px;
+    background: rgba(109, 20, 38, 0.08);
+    color: var(--burgundy);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="mobile-frame">
+  <!-- Floating Rose Petals Overlay -->
+  <canvas id="petalsCanvas"></canvas>
+
+  <!-- Top Hanging Floral Garland -->
+  <div class="top-garland">
+    <svg viewBox="0 0 440 110" width="100%" height="110" preserveAspectRatio="none">
+      <defs>
+        <radialGradient id="flowerPink" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFF5F7"/>
+          <stop offset="60%" stop-color="#F2B8C6"/>
+          <stop offset="100%" stop-color="#D47A90"/>
+        </radialGradient>
+        <radialGradient id="flowerGold" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFF8E7"/>
+          <stop offset="70%" stop-color="#E5C17B"/>
+          <stop offset="100%" stop-color="#B8873D"/>
+        </radialGradient>
+      </defs>
+      <!-- Hanging Strings -->
+      <line x1="28" y1="0" x2="28" y2="85" stroke="#C89B54" stroke-width="1" stroke-dasharray="2,2"/>
+      <circle cx="28" cy="42" r="5" fill="url(#flowerPink)"/>
+      <circle cx="28" cy="64" r="4" fill="url(#flowerGold)"/>
+      <circle cx="28" cy="86" r="6" fill="url(#flowerPink)"/>
+
+      <line x1="72" y1="0" x2="72" y2="62" stroke="#C89B54" stroke-width="1" stroke-dasharray="2,2"/>
+      <circle cx="72" cy="34" r="4.5" fill="url(#flowerGold)"/>
+      <circle cx="72" cy="62" r="5.5" fill="url(#flowerPink)"/>
+
+      <line x1="368" y1="0" x2="368" y2="62" stroke="#C89B54" stroke-width="1" stroke-dasharray="2,2"/>
+      <circle cx="368" cy="34" r="4.5" fill="url(#flowerGold)"/>
+      <circle cx="368" cy="62" r="5.5" fill="url(#flowerPink)"/>
+
+      <line x1="412" y1="0" x2="412" y2="85" stroke="#C89B54" stroke-width="1" stroke-dasharray="2,2"/>
+      <circle cx="412" cy="42" r="5" fill="url(#flowerPink)"/>
+      <circle cx="412" cy="64" r="4" fill="url(#flowerGold)"/>
+      <circle cx="412" cy="86" r="6" fill="url(#flowerPink)"/>
+
+      <!-- Corner Floral Clusters -->
+      <circle cx="14" cy="14" r="22" fill="url(#flowerPink)" opacity="0.85"/>
+      <circle cx="44" cy="10" r="16" fill="url(#flowerGold)" opacity="0.75"/>
+      <circle cx="74" cy="6" r="12" fill="url(#flowerPink)" opacity="0.7"/>
+
+      <circle cx="426" cy="14" r="22" fill="url(#flowerPink)" opacity="0.85"/>
+      <circle cx="396" cy="10" r="16" fill="url(#flowerGold)" opacity="0.75"/>
+      <circle cx="366" cy="6" r="12" fill="url(#flowerPink)" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <!-- 1. INTERACTIVE 3D BOOK COVER -->
+  <div class="book-stage" id="bookStage" onclick="openBook()">
+    <div class="book-container">
+      <!-- Inside White Floral Page -->
+      <div class="book-inside-page">
+        <div style="width:68px;height:68px;border-radius:50%;border:1px solid #C89B54;display:flex;align-items:center;justify-content:center;color:#6D1426;font-size:28px;">
+          ॐ
+        </div>
+      </div>
+
+      <!-- Burgundy & Gold Front Cover -->
+      <div class="book-front-cover">
+        <div class="cover-gold-frame"></div>
+        <div class="ganesh-circle">
+          <span style="font-size:32px;color:#E5C17B;">ॐ</span>
+        </div>
+        <div class="cover-main-title">SHUBH VIVAAH</div>
+        <div class="cover-sub-title">A Wedding Invitation</div>
+      </div>
+    </div>
+
+    <div class="tap-hint-wrap">
+      <div class="pulse-dot"><span></span></div>
+      <div class="tap-hint-text">Tap the Book to Open</div>
+    </div>
+  </div>
+
+  <!-- 2. HERO ARCH WITH TYPEWRITER NAMES & BLURRED ZOOMING BACKDROP -->
+  <section class="hero-section">
+    <div class="hero-arch">
+      <div class="arch-zoom-bg"></div>
+      <!-- Soft romantic silhouette art inside arch -->
+      <svg class="arch-silhouette-svg" viewBox="0 0 300 450" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <radialGradient id="softGlow" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="#D9A7B0"/>
+          </radialGradient>
+        </defs>
+        <rect width="300" height="450" fill="url(#softGlow)"/>
+        <circle cx="150" cy="175" r="75" fill="#B57B87" opacity="0.35"/>
+        <path d="M95,380 Q150,230 205,380 Z" fill="#8E4A58" opacity="0.35"/>
+      </svg>
+
+      <div class="arch-inner-line"></div>
+
+      <div class="arch-body">
+        <div class="arch-crest">
+          <span style="font-size:22px;color:var(--burgundy);">ॐ</span>
+        </div>
+        <div class="together-label">Together With Their Families</div>
+
+        <!-- Groom / Bride Typewriter Sequence -->
+        <div class="hero-name">
+          <span id="name1Text"></span><span class="typing-cursor" id="cursor1"></span>
+        </div>
+        <div class="fade-reveal" id="meta1">
+          <div class="relation-tag">Daughter of</div>
+          <div class="parents-line">Smt. Usha Sharma &amp;<br>Late Shri Brahmadatt Sharma</div>
+        </div>
+
+        <div class="ampersand-ornament fade-reveal" id="ampEl">&amp;</div>
+
+        <div class="hero-name">
+          <span id="name2Text"></span><span class="typing-cursor done" id="cursor2"></span>
+        </div>
+        <div class="fade-reveal" id="meta2">
+          <div class="relation-tag">Son of</div>
+          <div class="parents-line">Smt. Lata Gaur &amp;<br>Shri Janardan Prasad Gaur</div>
+        </div>
+
+        <p class="pleasure-text fade-reveal" id="pleasureEl">
+          request the pleasure of your<br>company at their wedding
+        </p>
+      </div>
+    </div>
+
+    <div class="scroll-cue">
+      Scroll
+      <span>&darr;</span>
+    </div>
+  </section>
+
+  <!-- 3. SAVE THE DATE — PULL / DRAG TASSEL TO REVEAL + CONFETTI -->
+  <section class="reveal-section">
+    <div class="kicker-small">Save The Date</div>
+    <h2 class="serif-title">Pull to Reveal</h2>
+
+    <div class="scroll-curtain-wrap" id="scrollWidget">
+      <div class="confetti-layer" id="confettiLayer"></div>
+
+      <!-- Top Gold Scroll Rod -->
+      <div class="scroll-rod"></div>
+
+      <!-- Unrolling Parchment -->
+      <div class="scroll-parchment" id="scrollParchment">
+        <div class="parchment-inner-border">
+          <div class="date-day">Wednesday</div>
+          <div class="date-number">10</div>
+          <div class="date-month">February</div>
+          <div class="date-year">2027</div>
+          <div class="date-venue-sub">
+            Baraat Swagat at 8:00 PM &bull; Community Centre,<br>
+            B.E.L. Colony, Balbhadrapur, Kotdwar
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Gold Scroll Rod -->
+      <div class="scroll-rod"></div>
+
+      <!-- Interactive Hanging Tassel -->
+      <div class="tassel-handle" id="tasselHandle" onclick="revealDateScroll()">
+        <div class="tassel-knot"></div>
+        <div class="tassel-cap"></div>
+        <div class="tassel-threads">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+
+      <div class="tassel-prompt" id="tasselPrompt">Pull or tap the tassel down</div>
+    </div>
+
+    <!-- Live Countdown & Add to Calendar -->
+    <div class="countdown-wrap" id="countdownWrap">
+      <div class="see-you-line">See you on Wednesday, 10 February 2027</div>
+
+      <div class="countdown-row">
+        <div class="cd-unit">
+          <span class="cd-num" id="cdDays">00</span>
+          <span class="cd-lbl">Days</span>
+        </div>
+        <span class="cd-sep">&bull;</span>
+        <div class="cd-unit">
+          <span class="cd-num" id="cdHours">00</span>
+          <span class="cd-lbl">Hrs</span>
+        </div>
+        <span class="cd-sep">&bull;</span>
+        <div class="cd-unit">
+          <span class="cd-num" id="cdMins">00</span>
+          <span class="cd-lbl">Min</span>
+        </div>
+        <span class="cd-sep">&bull;</span>
+        <div class="cd-unit">
+          <span class="cd-num" id="cdSecs">00</span>
+          <span class="cd-lbl">Sec</span>
+        </div>
+      </div>
+
+      <button class="add-cal-btn" onclick="downloadCalendarEvent()">
+        &#128197; Add to Calendar
+      </button>
+    </div>
+  </section>
+
+  <!-- 4. 3D COVERFLOW SWIPEABLE WEDDING FESTIVITIES -->
+  <section class="festivities-section">
+    <div class="kicker-small">Swipe Through The Celebrations</div>
+    <h2 class="serif-title" style="margin-bottom:8px;">Wedding Festivities</h2>
+
+    <div class="coverflow-viewport" id="festivitiesViewport">
+      <!-- Cards injected & positioned via JS for smooth 3D Coverflow swipe -->
+    </div>
+
+    <div class="cf-dots" id="festivitiesDots"></div>
+    <div class="swipe-caption">&lsaquo; Swipe to see every function &rsaquo;</div>
+  </section>
+
+  <!-- 5. MOMENTS / FAMILY BLESSINGS ARCH CAROUSEL -->
+  <section class="story-section">
+    <div class="kicker-small">Celebration Highlights</div>
+    <h2 class="serif-title" style="margin-bottom:10px;">Sacred Moments</h2>
+
+    <div class="story-viewport" id="storyViewport">
+      <!-- Arch slides injected via JS -->
+    </div>
+
+    <div class="swipe-caption">&lsaquo; Swipe to see more &rsaquo;</div>
+  </section>
+
+  <!-- 6. GRAND PRITIBHOJ / RECEPTION HIGHLIGHT CARD -->
+  <section class="reception-section">
+    <div class="grand-card">
+      <div class="grand-card-border"></div>
+      <div class="grand-kicker">You Are Invited To The</div>
+      <h2 class="grand-title">Grand Pritibhoj</h2>
+      <div class="grand-icon">&#129346;</div>
+      <div class="grand-date">Wednesday, 10 February 2027</div>
+      <div class="grand-sub">
+        8:00 PM onwards &bull; Wedding Feast &amp; Celebrations<br>
+        Community Centre, B.E.L. Colony, Kotdwar
+      </div>
+      <div class="grand-dress-pill">Dress Code: Festive Ethnic &amp; Sarees</div>
+    </div>
+  </section>
+
+  <!-- 7. HOW TO REACH + ILLUSTRATED ROUTE MAP + GOOGLE MAPS DIRECTIONS -->
+  <section class="location-section">
+    <div class="kicker-small">Location</div>
+    <h2 class="serif-title" style="margin-bottom:18px;">How to Reach</h2>
+
+    <!-- Interactive Illustrated Route Map Card -->
+    <a class="map-preview-card" href="https://www.google.com/maps/dir/?api=1&destination=Community+Centre+BEL+Colony+Balbhadrapur+Kotdwar+Pauri+Garhwal+Uttarakhand" target="_blank" rel="noopener">
+      <svg viewBox="0 0 380 155" width="100%" height="155" preserveAspectRatio="xMidYMid slice">
+        <rect width="380" height="155" fill="#F2ECE4"/>
+        <!-- Decorative Map Roads & River -->
+        <path d="M-10,45 Q120,30 220,75 T400,60" fill="none" stroke="#E2D8CC" stroke-width="12"/>
+        <path d="M90,-10 L130,170" fill="none" stroke="#E2D8CC" stroke-width="9"/>
+        <path d="M270,-10 L235,170" fill="none" stroke="#E2D8CC" stroke-width="8"/>
+        <path d="M0,125 Q180,105 390,135" fill="none" stroke="#D8E6ED" stroke-width="14"/>
+        <!-- Map Area Labels -->
+        <text x="32" y="28" font-family="Montserrat, sans-serif" font-size="8" fill="#9B8E82" letter-spacing="1.5">KOTDWAR</text>
+        <text x="155" y="42" font-family="Montserrat, sans-serif" font-size="7.5" fill="#9B8E82" letter-spacing="1.2">BALBHADRAPUR</text>
+        <text x="120" y="102" font-family="Montserrat, sans-serif" font-size="7.5" fill="#9B8E82" letter-spacing="1.2">B.E.L. COLONY ROAD</text>
+        <!-- Dashed Route Line -->
+        <path d="M75,112 C135,115 185,68 292,64" fill="none" stroke="#6D1426" stroke-width="2.5" stroke-dasharray="5,5"/>
+        <!-- Start Dot -->
+        <circle cx="75" cy="112" r="5" fill="#FFFFFF" stroke="#6D1426" stroke-width="2.5"/>
+        <!-- Destination Pin -->
+        <g transform="translate(292, 62)">
+          <circle cx="0" cy="0" r="14" fill="rgba(109, 20, 38, 0.14)"/>
+          <path d="M0,-18 C-7,-18 -12,-13 -12,-6 C-12,3 0,14 0,14 C0,14 12,3 12,-6 C12,-13 7,-18 0,-18 Z" fill="#6D1426"/>
+          <circle cx="0" cy="-7" r="4" fill="#FFFDFD"/>
+        </g>
+        <!-- Floating Label Box -->
+        <rect x="20" y="64" width="136" height="38" rx="8" fill="#FFFFFF" opacity="0.95"/>
+        <text x="30" y="80" font-family="Cormorant Garamond, serif" font-size="13" font-weight="700" fill="#3B1219">Community Centre</text>
+        <text x="30" y="93" font-family="Montserrat, sans-serif" font-size="7.5" fill="#7C5158">Tap to open in Maps</text>
+      </svg>
+    </a>
+
+    <div class="venue-big-name">Community Centre</div>
+    <p class="venue-full-addr">
+      B.E.L. Colony, Balbhadrapur,<br>
+      Kotdwar, Pauri Garhwal, Uttarakhand
+    </p>
+
+    <div class="dir-btn-row">
+      <a class="btn-dir-primary" href="https://www.google.com/maps/dir/?api=1&destination=Community+Centre+BEL+Colony+Balbhadrapur+Kotdwar+Pauri+Garhwal+Uttarakhand" target="_blank" rel="noopener">
+        &#10148; Get Directions
+      </a>
+      <button class="btn-dir-secondary" id="copyAddrBtn" onclick="copyVenueAddr()">
+        &#128203; Copy Address
+      </button>
+    </div>
+
+    <!-- Family Hosts & RSVP Footer -->
+    <div class="family-footer">
+      <p>
+        <strong>Darshanabhilashi:</strong><br>
+        Entire Sharma Family, Raturi Family, Shahu Family &amp; Dear Friends
+      </p>
+      <p>
+        <strong>Vineet:</strong><br>
+        Shri Satendra Sharma &ndash; Smt. Veena Sharma &bull; Dr. Raj Shahu &ndash; Kajol Sharma &bull; Smt. Usha Sharma
+      </p>
+      <p style="font-size:13px;">Residence: B-52, B.E.L. Colony, Kotdwar</p>
+      <a class="rsvp-call" href="tel:+919760117720">
+        &#128222; RSVP &amp; Contact: +91 97601 17720
+      </a>
+    </div>
+  </section>
+</div>
+
+<script>
+  /* ================= 1. BOOK OPEN & TYPEWRITER HERO SEQUENCE ================= */
+  let bookOpened = false;
+
+  function openBook() {
+    if (bookOpened) return;
+    bookOpened = true;
+    const stage = document.getElementById('bookStage');
+    stage.classList.add('opening');
+    setTimeout(() => {
+      stage.classList.add('hidden');
+      startHeroTypewriter();
+    }, 950);
+  }
+
+  function typeText(elementId, cursorId, text, speed, callback) {
+    const el = document.getElementById(elementId);
+    const cursor = document.getElementById(cursorId);
+    cursor.classList.remove('done');
+    let i = 0;
+    const timer = setInterval(() => {
+      el.textContent += text.charAt(i);
+      i++;
+      if (i >= text.length) {
+        clearInterval(timer);
+        cursor.classList.add('done');
+        if (callback) callback();
+      }
+    }, speed);
+  }
+
+  function startHeroTypewriter() {
+    typeText('name1Text', 'cursor1', 'Deeksha', 95, () => {
+      document.getElementById('meta1').classList.add('visible');
+      setTimeout(() => {
+        document.getElementById('ampEl').classList.add('visible');
+        typeText('name2Text', 'cursor2', 'Prashant', 95, () => {
+          document.getElementById('meta2').classList.add('visible');
+          setTimeout(() => {
+            document.getElementById('pleasureEl').classList.add('visible');
+          }, 250);
+        });
+      }, 280);
+    });
+  }
+
+  /* ================= 2. FALLING ROSE PETALS PARTICLE SYSTEM ================= */
+  (function initPetals() {
+    const canvas = document.getElementById('petalsCanvas');
+    const ctx = canvas.getContext('2d');
+    let w, h;
+
+    function resize() {
+      w = canvas.width = canvas.offsetWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const colors = ['rgba(232, 145, 165, 0.55)', 'rgba(244, 184, 198, 0.65)', 'rgba(205, 102, 126, 0.45)', 'rgba(235, 198, 132, 0.45)'];
+    const petals = Array.from({ length: 22 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      size: 5 + Math.random() * 6,
+      speedY: 0.6 + Math.random() * 1.1,
+      speedX: -0.4 + Math.random() * 0.8,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.03,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      petals.forEach(p => {
+        p.y += p.speedY;
+        p.x += p.speedX + Math.sin(p.angle) * 0.35;
+        p.angle += p.spin;
+        if (p.y > h + 15) { p.y = -15; p.x = Math.random() * w; }
+        if (p.x > w + 15) p.x = -15;
+        if (p.x < -15) p.x = w + 15;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size, p.size * 0.58, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  /* ================= 3. SAVE THE DATE — TASSEL PULL / DRAG + CONFETTI BURST ================= */
+  let dateRevealed = false;
+  let touchStartY = 0;
+
+  const tassel = document.getElementById('tasselHandle');
+  tassel.addEventListener('touchstart', e => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  tassel.addEventListener('touchmove', e => {
+    const dy = e.touches[0].clientY - touchStartY;
+    if (dy > 18 && !dateRevealed) {
+      revealDateScroll();
+    }
+  }, { passive: true });
+
+  function revealDateScroll() {
+    if (dateRevealed) return;
+    dateRevealed = true;
+
+    document.getElementById('scrollParchment').classList.add('unrolled');
+    document.getElementById('countdownWrap').classList.add('active');
+    document.getElementById('tasselPrompt').textContent = '10 February 2027 • Kotdwar';
+    launchConfettiBurst();
+  }
+
+  function launchConfettiBurst() {
+    const layer = document.getElementById('confettiLayer');
+    const palette = ['#6D1426', '#D47A90', '#E5C17B', '#F4B8C6', '#9B7130', '#FFFDFD'];
+
+    for (let i = 0; i < 42; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.background = palette[i % palette.length];
+      piece.style.left = (25 + Math.random() * 50) + '%';
+      piece.style.top = (30 + Math.random() * 35) + '%';
+      piece.style.borderRadius = i % 2 === 0 ? '50%' : '2px';
+      layer.appendChild(piece);
+
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 60 + Math.random() * 140;
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist + 40;
+      const rot = (Math.random() - 0.5) * 720;
+
+      piece.animate([
+        { transform: 'translate(0, 0) rotate(0deg) scale(0.5)', opacity: 1 },
+        { transform: `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(1)`, opacity: 0 }
+      ], {
+        duration: 1300 + Math.random() * 600,
+        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        fill: 'forwards'
+      });
+    }
+  }
+
+  /* Live Countdown to 10 Feb 2027, 8:00 PM IST */
+  const targetWeddingTime = new Date('2027-02-10T20:00:00+05:30').getTime();
+
+  function tickCountdown() {
+    const now = Date.now();
+    const diff = Math.max(0, targetWeddingTime - now);
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('cdDays').textContent = String(d).padStart(2, '0');
+    document.getElementById('cdHours').textContent = String(h).padStart(2, '0');
+    document.getElementById('cdMins').textContent = String(m).padStart(2, '0');
+    document.getElementById('cdSecs').textContent = String(s).padStart(2, '0');
+  }
+  setInterval(tickCountdown, 1000);
+  tickCountdown();
+
+  /* ================= 4. 3D COVERFLOW WEDDING FESTIVITIES ================= */
+  const eventsData = [
+    {
+      dateTime: 'TUE · 09 FEB · 11:00 AM',
+      title: 'Mehendi',
+      venue: 'Community Centre, B.E.L. Colony, Kotdwar',
+      dress: 'Wear green',
+      swatch: '#3B7A47',
+      headerBg: 'linear-gradient(135deg, #A5D6A7 0%, #66BB6A 100%)',
+      icon: '🌿'
+    },
+    {
+      dateTime: 'TUE · 09 FEB · 2:00 PM',
+      title: 'Mahila Sangeet',
+      venue: 'Community Centre, B.E.L. Colony, Kotdwar',
+      dress: 'Purple & pink',
+      swatch: '#9C27B0',
+      headerBg: 'linear-gradient(135deg, #BA68C8 0%, #7B1FA2 100%)',
+      icon: '🎶'
+    },
+    {
+      dateTime: 'WED · 10 FEB · 10:00 AM',
+      title: 'Haldi Haath',
+      venue: 'Community Centre, B.E.L. Colony, Kotdwar',
+      dress: 'Wear yellow',
+      swatch: '#FBC02D',
+      headerBg: 'linear-gradient(135deg, #FFE082 0%, #FFB300 100%)',
+      icon: '🌼'
+    },
+    {
+      dateTime: 'WED · 10 FEB · 8:00 PM',
+      title: 'Baraat Swagat',
+      venue: 'Community Centre, B.E.L. Colony, Kotdwar',
+      dress: 'Festive red & gold',
+      swatch: '#8E1B24',
+      headerBg: 'linear-gradient(135deg, #8E1B24 0%, #4A0B18 100%)',
+      icon: '🥁'
+    },
+    {
+      dateTime: 'WED · 10 FEB · 8:00 PM',
+      title: 'Pritibhoj',
+      venue: 'Community Centre, B.E.L. Colony, Kotdwar',
+      dress: 'Traditional festive',
+      swatch: '#D97724',
+      headerBg: 'linear-gradient(135deg, #F4A261 0%, #D97724 100%)',
+      icon: '🪔'
+    },
+    {
+      dateTime: 'THU · 11 FEB · 6:00 AM',
+      title: 'Baraat Vidaai',
+      venue: 'Community Centre, B.E.L. Colony, Kotdwar',
+      dress: 'Warm blessings',
+      swatch: '#C89B54',
+      headerBg: 'linear-gradient(135deg, #E5C17B 0%, #B8873D 100%)',
+      icon: '💐'
+    }
+  ];
+
+  let activeEventIdx = 0;
+  const fViewport = document.getElementById('festivitiesViewport');
+  const fDots = document.getElementById('festivitiesDots');
+
+  eventsData.forEach((ev, idx) => {
+    const card = document.createElement('div');
+    card.className = 'cf-card';
+    card.innerHTML = `
+      <div class="cf-card-top" style="background: ${ev.headerBg};">
+        <div class="cf-icon-badge">${ev.icon}</div>
+      </div>
+      <div class="cf-card-body">
+        <div class="cf-date-time">${ev.dateTime}</div>
+        <div class="cf-title">${ev.title}</div>
+        <div class="cf-venue">${ev.venue}</div>
+        <div class="cf-dress-box">
+          <div class="cf-swatch" style="background: ${ev.swatch};"></div>
+          <div>
+            <span class="cf-dress-label">Dress Code</span>
+            <span class="cf-dress-val">${ev.dress}</span>
+          </div>
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      activeEventIdx = idx;
+      renderCoverflow();
+    });
+    fViewport.appendChild(card);
+
+    const dot = document.createElement('span');
+    dot.className = 'cf-dot' + (idx === 0 ? ' active' : '');
+    dot.addEventListener('click', () => {
+      activeEventIdx = idx;
+      renderCoverflow();
+    });
+    fDots.appendChild(dot);
+  });
+
+  function renderCoverflow() {
+    const cards = fViewport.querySelectorAll('.cf-card');
+    const dots = fDots.querySelectorAll('.cf-dot');
+    const total = cards.length;
+
+    cards.forEach((card, i) => {
+      let offset = i - activeEventIdx;
+      // Wrap around cleanly for infinite-feel circular swipe
+      if (offset > Math.floor(total / 2)) offset -= total;
+      if (offset < -Math.floor(total / 2)) offset += total;
+
+      const absOff = Math.abs(offset);
+      const translateX = offset * 165;
+      const scale = offset === 0 ? 1 : Math.max(0.76, 1 - absOff * 0.14);
+      const rotateY = offset * -14;
+      const zIndex = 20 - absOff;
+      const opacity = absOff > 2 ? 0 : (offset === 0 ? 1 : 0.78);
+
+      card.style.transform = `translateX(${translateX}px) scale(${scale}) perspective(900px) rotateY(${rotateY}deg)`;
+      card.style.zIndex = zIndex;
+      card.style.opacity = opacity;
+    });
+
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeEventIdx));
+  }
+
+  renderCoverflow();
+
+  // Touch swipe handler for Festivities Coverflow
+  let fStartX = 0;
+  fViewport.addEventListener('touchstart', e => { fStartX = e.touches[0].clientX; }, { passive: true });
+  fViewport.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - fStartX;
+    if (Math.abs(dx) > 35) {
+      if (dx < 0) activeEventIdx = (activeEventIdx + 1) % eventsData.length;
+      else activeEventIdx = (activeEventIdx - 1 + eventsData.length) % eventsData.length;
+      renderCoverflow();
+    }
+  });
+
+  /* ================= 5. SACRED MOMENTS / ARCH CAROUSEL ================= */
+  const momentsData = [
+    {
+      label: 'Two Families Unite',
+      bg: 'linear-gradient(160deg, #F6D8DF 0%, #D99AA8 100%)',
+      symbol: '💍'
+    },
+    {
+      label: 'Kotdwar, Uttarakhand',
+      bg: 'linear-gradient(160deg, #E8DFC8 0%, #C8A977 100%)',
+      symbol: '🏔️'
+    },
+    {
+      label: '10 February 2027',
+      bg: 'linear-gradient(160deg, #F2D2D8 0%, #B86B7B 100%)',
+      symbol: '✨'
+    }
+  ];
+
+  let activeMomentIdx = 0;
+  const sViewport = document.getElementById('storyViewport');
+
+  momentsData.forEach((m, idx) => {
+    const card = document.createElement('div');
+    card.className = 'story-arch-card';
+    card.innerHTML = `
+      <div class="story-arch-inner" style="background: ${m.bg};">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:54px;opacity:0.85;">
+          ${m.symbol}
+        </div>
+        <div class="story-pill">${m.label}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      activeMomentIdx = idx;
+      renderMoments();
+    });
+    sViewport.appendChild(card);
+  });
+
+  function renderMoments() {
+    const cards = sViewport.querySelectorAll('.story-arch-card');
+    const total = cards.length;
+    cards.forEach((card, i) => {
+      let offset = i - activeMomentIdx;
+      if (offset > 1) offset -= total;
+      if (offset < -1) offset += total;
+
+      const translateX = offset * 155;
+      const scale = offset === 0 ? 1 : 0.84;
+      const zIndex = offset === 0 ? 15 : 8;
+      const opacity = offset === 0 ? 1 : 0.72;
+
+      card.style.transform = `translateX(${translateX}px) scale(${scale})`;
+      card.style.zIndex = zIndex;
+      card.style.opacity = opacity;
+    });
+  }
+  renderMoments();
+
+  let sStartX = 0;
+  sViewport.addEventListener('touchstart', e => { sStartX = e.touches[0].clientX; }, { passive: true });
+  sViewport.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sStartX;
+    if (Math.abs(dx) > 35) {
+      if (dx < 0) activeMomentIdx = (activeMomentIdx + 1) % momentsData.length;
+      else activeMomentIdx = (activeMomentIdx - 1 + momentsData.length) % momentsData.length;
+      renderMoments();
+    }
+  });
+
+  /* ================= 6. COPY ADDRESS & CALENDAR DOWNLOAD ================= */
+  function copyVenueAddr() {
+    const addr = 'Community Centre, B.E.L. Colony, Balbhadrapur, Kotdwar, Pauri Garhwal, Uttarakhand';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(addr).then(() => {
+        const btn = document.getElementById('copyAddrBtn');
+        btn.innerHTML = '&#10003; Copied!';
+        setTimeout(() => { btn.innerHTML = '&#128203; Copy Address'; }, 2400);
+      });
+    } else {
+      alert(addr);
+    }
+  }
+
+  function downloadCalendarEvent() {
+    const ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Deeksha & Prashant Wedding//EN',
+      'BEGIN:VEVENT',
+      'DTSTART:20270210T143000Z',
+      'DTEND:20270211T003000Z',
+      'SUMMARY:Deeksha & Prashant — Shubh Vivaah',
+      'LOCATION:Community Centre, B.E.L. Colony, Balbhadrapur, Kotdwar, Pauri Garhwal, Uttarakhand',
+      'DESCRIPTION:Wedding celebrations of Deeksha & Prashant. Contact: +91 9760117720',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'Deeksha-Prashant-Wedding.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+</script>
+</body>
+</html>
