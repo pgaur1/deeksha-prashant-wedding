@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="intro-locked">
 <head>
 <meta charset="UTF-8">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Deeksha &amp; Prashant — Wedding Invitation">
 <meta property="og:description" content="10 February 2027 • Kotdwar • Tap the invitation card to open your interactive wedding invite.">
-<meta property="og:image" content="https://pgaur1.github.io/deeksha-prashant-wedding/invitation-2/invite-preview.jpg">
+<meta property="og:image" content="https://pgaur1.github.io/deeksha-prashant-wedding/invitation-2/1795446932855.png">
 <meta property="og:image:width" content="768">
 <meta property="og:image:height" content="1376">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Deeksha &amp; Prashant — Wedding Invitation">
 <meta name="twitter:description" content="10 February 2027 • Kotdwar • Tap the invitation card to open your interactive wedding invite.">
-<meta name="twitter:image" content="https://pgaur1.github.io/deeksha-prashant-wedding/invitation-2/invite-preview.jpg">
+<meta name="twitter:image" content="https://pgaur1.github.io/deeksha-prashant-wedding/invitation-2/1795446932855.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Deeksha & Prashant — Wedding Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,6 +45,12 @@
     color: var(--text-dark);
     font-family: 'Cormorant Garamond', Georgia, serif;
     overflow-x: hidden;
+  }
+
+  html.intro-locked,
+  body.intro-locked {
+    overflow: hidden;
+    overscroll-behavior: none;
   }
 
   /* Mobile viewport shell */
@@ -83,159 +89,285 @@
     overflow: hidden;
   }
 
-  /* ================= 1. 3D BOOK COVER (0:00 - 0:02) ================= */
-  .book-stage {
-    position: fixed;
-    inset: 0;
-    max-width: 440px;
-    margin: 0 auto;
-    z-index: 200;
-    background: radial-gradient(circle at center, #F5DDE2 0%, #E8C5CC 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    perspective: 1800px;
-    transition: opacity 0.85s ease 0.55s, visibility 0.85s ease 0.55s;
-  }
-
-  .book-stage.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .book-container {
-    width: 280px;
-    height: 390px;
+  /* ================= 1. PHOTO DOORWAY OPENING ================= */
+  .opening-stage {
     position: relative;
-    transform-style: preserve-3d;
-    cursor: pointer;
-    transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
-
-  .book-stage.opening .book-container {
-    transform: scale(1.15);
-  }
-
-  /* Inside right page (white floral page seen at 0:01) */
-  .book-inside-page {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, #FFFDFD 0%, #F7E8EB 100%);
-    border-radius: 6px 14px 14px 6px;
-    box-shadow: 0 22px 45px rgba(74, 11, 24, 0.28);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(200, 155, 84, 0.35);
+    width: min(100%, 440px);
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    min-height: 480px;
+    margin: 0 auto;
     overflow: hidden;
+    isolation: isolate;
+    perspective: 1500px;
+    background: #281b1a;
   }
 
-  /* Front Burgundy Cover */
-  .book-front-cover {
+  .opening-photo {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 35% 30%, #83192E 0%, var(--burgundy) 60%, var(--burgundy-deep) 100%);
-    border-radius: 6px 14px 14px 6px;
-    transform-origin: left center;
-    transform-style: preserve-3d;
-    transition: transform 1.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-    box-shadow: 0 24px 48px rgba(45, 6, 14, 0.45), inset 4px 0 12px rgba(255,255,255,0.12);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
-  .book-stage.opening .book-front-cover {
-    transform: rotateY(-165deg);
-  }
-
-  .cover-gold-frame {
+  .room-scene {
     position: absolute;
-    inset: 14px;
-    border: 1.5px solid var(--gold-bright);
-    pointer-events: none;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(1.09);
+    transition: opacity 1.15s ease 0.7s, transform 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
   }
 
-  .cover-gold-frame::before {
+  .room-scene::after {
     content: "";
     position: absolute;
-    inset: 5px;
-    border: 0.75px solid rgba(229, 193, 123, 0.55);
+    inset: 0;
+    background: linear-gradient(180deg, rgba(48, 26, 22, 0.08), transparent 35%, rgba(35, 18, 19, 0.3));
+    pointer-events: none;
   }
 
-  .ganesh-circle {
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    border: 1.2px solid var(--gold-bright);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 22px;
-    box-shadow: 0 0 24px rgba(229, 193, 123, 0.25);
+  .opening-stage.opening .room-scene {
+    opacity: 1;
+    transform: scale(1);
   }
 
-  .cover-main-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 20px;
-    letter-spacing: 3px;
-    color: #FFF4DC;
+  .cover-photo {
+    z-index: 2;
+    transition: opacity 1.05s ease 0.82s, transform 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+  }
+
+  .opening-stage.opening .cover-photo {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+
+  .door-leaf {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 1.65s cubic-bezier(0.22, 0.8, 0.25, 1) 0.08s, opacity 0.7s ease 0.85s;
+  }
+
+  .door-leaf-left {
+    transform-origin: 28% 64%;
+  }
+
+  .door-leaf-right {
+    transform-origin: 79% 64%;
+  }
+
+  .opening-stage.opening .door-leaf-left {
+    opacity: 0;
+    transform: rotateY(-108deg);
+  }
+
+  .opening-stage.opening .door-leaf-right {
+    opacity: 0;
+    transform: rotateY(108deg);
+  }
+
+  .cover-shade {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background: linear-gradient(180deg, rgba(51, 24, 21, 0.05) 22%, rgba(49, 18, 27, 0.16) 52%, rgba(39, 12, 21, 0.42) 100%);
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .opening-stage.opening .cover-shade {
+    opacity: 0;
+  }
+
+  .cover-content {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  .opening-stage.opening .cover-content {
+    opacity: 0;
+  }
+
+  .cover-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: min(78%, 310px);
+    transform: translate(-50%, -50%);
+    padding: 12px 22px 15px;
+    border: 1px solid rgba(200, 155, 84, 0.82);
+    border-radius: 4px;
+    background: rgba(253, 247, 239, 0.9);
+    box-shadow: 0 12px 36px rgba(38, 18, 14, 0.22), inset 0 0 0 4px rgba(255, 255, 255, 0.52);
+    color: var(--burgundy);
+    font-family: 'Cinzel Decorative', 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 6vw, 29px);
+    font-weight: 400;
+    letter-spacing: 1.6px;
     text-align: center;
-    margin-bottom: 8px;
+    text-shadow: 0 1px 0 #fff;
   }
 
-  .cover-sub-title {
+  .cover-open-button {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 205px;
+    padding: 12px 22px;
+    border: 1px solid rgba(229, 193, 123, 0.95);
+    border-radius: 999px;
+    color: #FFF8EE;
+    background: rgba(74, 11, 24, 0.86);
+    box-shadow: 0 8px 26px rgba(38, 18, 14, 0.28);
     font-family: 'Montserrat', sans-serif;
     font-size: 9px;
-    letter-spacing: 3.5px;
-    color: var(--gold-bright);
+    font-weight: 600;
+    letter-spacing: 2.1px;
     text-transform: uppercase;
-  }
-
-  .tap-hint-wrap {
-    margin-top: 34px;
-    text-align: center;
+    pointer-events: auto;
     cursor: pointer;
+    animation: invitationPulse 2.2s ease-in-out infinite;
   }
 
-  .pulse-dot {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: 1px solid rgba(109, 20, 38, 0.35);
+  .cover-open-button::before,
+  .cover-open-button::after {
+    content: "✦";
+    margin: 0 9px;
+    color: var(--gold-bright);
+  }
+
+  @keyframes invitationPulse {
+    0%, 100% { box-shadow: 0 8px 26px rgba(38, 18, 14, 0.28), 0 0 0 0 rgba(229, 193, 123, 0.32); }
+    65% { box-shadow: 0 8px 26px rgba(38, 18, 14, 0.28), 0 0 0 10px rgba(229, 193, 123, 0); }
+  }
+
+  .room-message {
+    position: absolute;
+    top: 19%;
+    left: 50%;
+    z-index: 3;
+    width: min(88%, 360px);
+    padding: 17px 18px 15px;
+    border: 1px solid rgba(200, 155, 84, 0.78);
+    border-radius: 18px;
+    background: rgba(253, 247, 239, 0.88);
+    box-shadow: 0 14px 38px rgba(43, 25, 17, 0.18), inset 0 0 0 4px rgba(255, 255, 255, 0.36);
+    color: var(--burgundy);
+    text-align: center;
+    opacity: 0;
+    transform: translate(-50%, 14px) scale(0.97);
+    transition: opacity 0.8s ease 1.35s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.35s;
+  }
+
+  .opening-stage.opening .room-message {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .room-ornament {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 10px;
-    animation: ringPulse 2s infinite;
+    gap: 13px;
+    margin-bottom: 4px;
+    color: var(--gold-dark);
+    font-size: 15px;
   }
 
-  .pulse-dot span {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--burgundy);
-    display: block;
+  .room-ornament span:nth-child(2) {
+    font-size: 24px;
+    filter: drop-shadow(0 2px 3px rgba(109, 20, 38, 0.16));
+    animation: heartGlow 1.8s ease-in-out infinite;
   }
 
-  @keyframes ringPulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(109, 20, 38, 0.4); }
-    70% { transform: scale(1.06); box-shadow: 0 0 0 12px rgba(109, 20, 38, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(109, 20, 38, 0); }
+  @keyframes heartGlow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.14); }
   }
 
-  .tap-hint-text {
+  .room-message-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(25px, 7vw, 34px);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.05;
+  }
+
+  .room-message-sparkles {
+    margin-top: 7px;
+    font-size: 17px;
+    letter-spacing: 7px;
+  }
+
+  .opening-scroll-cue {
+    position: absolute;
+    right: 0;
+    bottom: max(24px, env(safe-area-inset-bottom));
+    left: 0;
+    z-index: 4;
+    color: #FFF8EE;
     font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
-    letter-spacing: 2.8px;
-    color: var(--burgundy);
+    letter-spacing: 2.3px;
+    text-align: center;
+    text-shadow: 0 2px 12px rgba(38, 18, 14, 0.8);
     text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(7px);
+    transition: opacity 0.7s ease 1.7s, transform 0.7s ease 1.7s;
+  }
+
+  .opening-stage.opening .opening-scroll-cue {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .opening-scroll-cue span {
+    display: block;
+    margin-top: 5px;
+    font-size: 18px;
+    animation: invitationScroll 1.5s ease-in-out infinite;
+  }
+
+  @keyframes invitationScroll {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  @media (max-height: 620px) {
+    .cover-title { top: 47%; }
+    .cover-open-button { top: 61%; }
+    .room-message { top: 13%; padding: 12px 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .room-scene,
+    .cover-photo,
+    .door-leaf,
+    .cover-shade,
+    .cover-content,
+    .room-message,
+    .opening-scroll-cue { transition-duration: 0.01ms; transition-delay: 0ms; }
+    .cover-open-button,
+    .room-ornament span:nth-child(2),
+    .opening-scroll-cue span { animation: none; }
   }
 
   /* ================= 2. HERO GOLD ARCH SECTION (0:02 - 0:06) ================= */
@@ -1097,7 +1229,47 @@
   }
 </style>
 </head>
-<body>
+<body class="intro-locked">
+
+<section class="opening-stage" id="openingStage" aria-label="Wedding invitation opening">
+  <div class="room-scene" aria-hidden="true">
+    <img class="opening-photo" src="1795447129250.jpg" alt="">
+  </div>
+
+  <img class="opening-photo cover-photo" src="1795446932855.png" alt="Flower-covered turquoise doors">
+
+  <svg class="door-leaf door-leaf-left" viewBox="0 0 768 1376" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <clipPath id="leftDoorClip" clipPathUnits="userSpaceOnUse">
+        <path d="M225 1292V704C225 596 293 522 384 516V1292Z"/>
+      </clipPath>
+    </defs>
+    <image href="1795446932855.png" x="0" y="0" width="768" height="1376" clip-path="url(#leftDoorClip)"/>
+  </svg>
+
+  <svg class="door-leaf door-leaf-right" viewBox="0 0 768 1376" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <clipPath id="rightDoorClip" clipPathUnits="userSpaceOnUse">
+        <path d="M384 516C475 522 543 596 543 704V1292H384Z"/>
+      </clipPath>
+    </defs>
+    <image href="1795446932855.png" x="0" y="0" width="768" height="1376" clip-path="url(#rightDoorClip)"/>
+  </svg>
+
+  <div class="cover-shade" aria-hidden="true"></div>
+  <div class="cover-content">
+    <h1 class="cover-title">You&rsquo;re Invited</h1>
+    <button class="cover-open-button" type="button" onclick="openInvitation()">Tap to Open</button>
+  </div>
+
+  <div class="room-message">
+    <div class="room-ornament" aria-hidden="true"><span>✦</span><span>💞</span><span>✦</span></div>
+    <p class="room-message-text">We are getting together</p>
+    <div class="room-message-sparkles" aria-hidden="true">🪷 &nbsp; ✨ &nbsp; 💖</div>
+  </div>
+
+  <div class="opening-scroll-cue">Scroll down to continue<span>&darr;</span></div>
+</section>
 
 <div class="mobile-frame">
   <!-- Floating Rose Petals Overlay -->
@@ -1148,34 +1320,7 @@
     </svg>
   </div>
 
-  <!-- 1. INTERACTIVE 3D BOOK COVER -->
-  <div class="book-stage" id="bookStage" onclick="openBook()">
-    <div class="book-container">
-      <!-- Inside White Floral Page -->
-      <div class="book-inside-page">
-        <div style="width:68px;height:68px;border-radius:50%;border:1px solid #C89B54;display:flex;align-items:center;justify-content:center;color:#6D1426;font-size:28px;">
-          ॐ
-        </div>
-      </div>
-
-      <!-- Burgundy & Gold Front Cover -->
-      <div class="book-front-cover">
-        <div class="cover-gold-frame"></div>
-        <div class="ganesh-circle">
-          <span style="font-size:32px;color:#E5C17B;">ॐ</span>
-        </div>
-        <div class="cover-main-title">SHUBH VIVAAH</div>
-        <div class="cover-sub-title">A Wedding Invitation</div>
-      </div>
-    </div>
-
-    <div class="tap-hint-wrap">
-      <div class="pulse-dot"><span></span></div>
-      <div class="tap-hint-text">Tap the Book to Open</div>
-    </div>
-  </div>
-
-  <!-- 2. HERO ARCH WITH TYPEWRITER NAMES & BLURRED ZOOMING BACKDROP -->
+  <!-- 1. HERO ARCH WITH TYPEWRITER NAMES & BLURRED ZOOMING BACKDROP -->
   <section class="hero-section">
     <div class="hero-arch">
       <div class="arch-zoom-bg"></div>
@@ -1413,23 +1558,21 @@
 </div>
 
 <script>
-  /* ================= 1. BOOK OPEN & TYPEWRITER HERO SEQUENCE ================= */
-  let bookOpened = false;
+  /* ================= 1. PHOTO DOORS OPEN & TYPEWRITER HERO SEQUENCE ================= */
+  let invitationOpened = false;
 
-  function openBook() {
-    if (bookOpened) return;
-    bookOpened = true;
-    const stage = document.getElementById('bookStage');
+  function openInvitation() {
+    if (invitationOpened) return;
+    invitationOpened = true;
+    const stage = document.getElementById('openingStage');
     stage.classList.add('opening');
-    setTimeout(() => {
-      function onCoverFade(event) {
-        if (event.target !== stage || event.propertyName !== 'opacity') return;
-        stage.removeEventListener('transitionend', onCoverFade);
-        startHeroTypewriter();
-      }
-      stage.addEventListener('transitionend', onCoverFade);
-      stage.classList.add('hidden');
-    }, 950);
+    stage.querySelector('.cover-open-button').disabled = true;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.setTimeout(() => {
+      document.documentElement.classList.remove('intro-locked');
+      document.body.classList.remove('intro-locked');
+      startHeroTypewriter();
+    }, reducedMotion ? 50 : 2450);
   }
 
   function typeText(elementId, cursorId, text, speed, callback) {
