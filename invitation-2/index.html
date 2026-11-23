@@ -43,6 +43,10 @@
     overflow-x: hidden;
   }
 
+  body.opening-active {
+    overflow: hidden;
+  }
+
   /* Mobile viewport shell */
   .mobile-frame {
     max-width: 440px;
@@ -79,7 +83,7 @@
     overflow: hidden;
   }
 
-  /* ================= 1. FLORAL DOORWAY REVEAL ================= */
+  /* ================= 1. CINEMATIC INVITATION REVEAL ================= */
   .opening-stage {
     position: fixed;
     inset: 0;
@@ -87,38 +91,40 @@
     margin: 0 auto;
     z-index: 200;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 34%, #FBF8F1 0%, #E4ECE4 56%, #B8CCC1 100%);
+    background:
+      radial-gradient(ellipse at 50% 42%, rgba(226, 238, 225, 0.96) 0%, rgba(164, 190, 174, 0.9) 54%, rgba(16, 58, 61, 0.98) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    padding: 34px 18px;
-    color: var(--text-dark);
-    transition: opacity 0.75s ease 0.35s, visibility 0.75s ease 0.35s;
+    gap: 14px;
+    padding: 24px 18px;
+    color: #173F3F;
+    perspective: 1400px;
+    transition: opacity 0.9s ease, visibility 0.9s ease;
   }
 
   .opening-stage::before,
   .opening-stage::after {
     content: "";
     position: absolute;
-    width: 280px;
-    height: 280px;
-    border: 1px solid rgba(185, 138, 85, 0.18);
+    width: 320px;
+    height: 320px;
+    border: 1px solid rgba(255, 247, 224, 0.24);
     border-radius: 50%;
     pointer-events: none;
   }
 
   .opening-stage::before {
-    top: -150px;
-    left: -150px;
+    top: -190px;
+    left: -190px;
   }
 
   .opening-stage::after {
-    right: -170px;
-    bottom: -170px;
-    width: 340px;
-    height: 340px;
+    right: -210px;
+    bottom: -210px;
+    width: 420px;
+    height: 420px;
   }
 
   .opening-stage.hidden {
@@ -127,217 +133,194 @@
     pointer-events: none;
   }
 
-  .opening-kicker,
-  .opening-instruction {
+  .opening-kicker {
     position: relative;
-    z-index: 6;
+    z-index: 2;
+    color: rgba(255, 253, 248, 0.88);
     font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     text-align: center;
+    opacity: 0;
+    transform: translateY(12px);
   }
 
-  .opening-kicker {
-    color: var(--text-muted);
-    font-size: 9px;
-    letter-spacing: 3.2px;
-  }
-
-  .opening-doorway {
+  .cinematic-scene {
     position: relative;
-    width: min(78vw, 310px);
-    height: min(54vh, 390px);
-    min-height: 285px;
-    border: 1px solid rgba(185, 138, 85, 0.68);
-    border-radius: 170px 170px 18px 18px;
-    padding: 9px;
-    background: rgba(255, 253, 248, 0.52);
-    box-shadow: 0 24px 60px rgba(20, 59, 61, 0.18);
-    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 1;
+    width: 100%;
+    height: min(66vh, 490px);
+    min-height: 310px;
+    display: grid;
+    place-items: center;
+    transform-style: preserve-3d;
   }
 
-  .opening-doorway::before {
+  .cinematic-card {
+    position: relative;
+    width: min(72vw, 282px);
+    height: min(55vh, 390px);
+    min-height: 275px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 201, 139, 0.9);
+    border-radius: 8px;
+    background: linear-gradient(155deg, #FBF8EF 0%, #EEE5D2 100%);
+    box-shadow: 0 35px 90px rgba(7, 39, 41, 0.48), 0 0 0 8px rgba(255, 253, 248, 0.08);
+    transform-style: preserve-3d;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .cinematic-card::before {
     content: "";
     position: absolute;
-    inset: 7px;
-    border: 1px solid rgba(185, 138, 85, 0.38);
-    border-radius: 164px 164px 12px 12px;
+    inset: 10px;
+    border: 1px solid rgba(185, 138, 85, 0.62);
     pointer-events: none;
-    z-index: 5;
+    z-index: 3;
   }
 
-  .opening-door-light {
+  .cinematic-card::after {
+    content: "";
     position: absolute;
-    inset: 10px;
-    border-radius: 160px 160px 10px 10px;
-    background: radial-gradient(ellipse at 50% 40%, #FFFDF8 0%, #F1E8D8 100%);
+    top: -20%;
+    left: -90%;
+    width: 60%;
+    height: 140%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+    transform: rotate(18deg);
+    z-index: 4;
+  }
+
+  .cinematic-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cinematic-card-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    padding: 26px 20px;
     text-align: center;
-    overflow: hidden;
-    box-shadow: inset 0 0 40px rgba(185, 138, 85, 0.16);
   }
 
-  .opening-reveal {
-    position: relative;
-    z-index: 1;
-    padding: 20px;
-    opacity: 0.75;
-    transform: scale(0.94);
-    transition: opacity 0.7s ease 0.2s, transform 0.9s ease 0.1s;
-  }
-
-  .opening-stage.opening .opening-reveal {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .opening-reveal-mark {
-    width: 52px;
-    height: 52px;
-    margin: 0 auto 15px;
+  .cinematic-mark {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 18px;
     display: grid;
     place-items: center;
     border: 1px solid var(--gold);
     border-radius: 50%;
     color: var(--burgundy);
-    font-size: 24px;
+    font-size: 22px;
   }
 
-  .opening-reveal-names {
-    color: var(--burgundy-deep);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(24px, 7vw, 34px);
-    line-height: 1.1;
-  }
-
-  .opening-reveal-subtitle {
-    margin-top: 9px;
-    color: var(--gold-dark);
+  .cinematic-overline,
+  .cinematic-date {
+    color: #687C72;
     font-family: 'Montserrat', sans-serif;
-    font-size: 8px;
-    letter-spacing: 2.4px;
+    font-size: 7px;
+    letter-spacing: 2px;
     text-transform: uppercase;
   }
 
-  .opening-doors {
-    position: absolute;
-    inset: 10px;
-    z-index: 2;
-    display: flex;
-    perspective: 1400px;
-    border-radius: 160px 160px 10px 10px;
-    overflow: hidden;
+  .cinematic-names {
+    margin: 15px 0;
+    color: #174D50;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(29px, 8vw, 38px);
+    font-weight: 500;
+    line-height: 0.98;
   }
 
-  .opening-door-panel {
-    position: relative;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(145deg, #287176 0%, #18565A 52%, #103A3D 100%);
-    box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.08);
-    transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
-    backface-visibility: hidden;
+  .cinematic-names span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--gold-dark);
   }
 
-  .opening-door-panel::before {
-    content: "";
-    position: absolute;
-    inset: 14px 8px;
-    border: 1px solid rgba(230, 201, 139, 0.68);
-    border-radius: 150px 150px 8px 8px;
-    pointer-events: none;
+  .cinematic-date {
+    margin-top: 5px;
+    color: #687C72;
   }
 
-  .opening-door-panel::after {
-    content: "";
-    position: absolute;
-    top: 38%;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gold-bright);
-    box-shadow: 0 0 0 4px rgba(230, 201, 139, 0.16);
+  .opening-stage.playing .opening-kicker {
+    animation: captionRise 1s ease 0.2s forwards;
   }
 
-  .opening-door-panel-left {
-    transform-origin: left center;
-    border-right: 1px solid rgba(230, 201, 139, 0.7);
+  .opening-stage.playing .cinematic-card {
+    animation: cardApproach 4.4s cubic-bezier(0.22, 0.75, 0.25, 1) forwards;
   }
 
-  .opening-door-panel-left::after {
-    right: 12px;
+  .opening-stage.playing .cinematic-card::after {
+    animation: cardLightSweep 1.3s ease 2.1s forwards;
   }
 
-  .opening-door-panel-right {
-    transform-origin: right center;
-    border-left: 1px solid rgba(230, 201, 139, 0.7);
+  @keyframes captionRise {
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .opening-door-panel-right::after {
-    left: 12px;
+  @keyframes cardApproach {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 25vh, -380px) rotateX(17deg) rotateY(-9deg) scale(0.56);
+    }
+    18% {
+      opacity: 1;
+      transform: translate3d(0, 8vh, -190px) rotateX(9deg) rotateY(-5deg) scale(0.72);
+    }
+    58% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) scale(1);
+    }
+    76% {
+      transform: translate3d(0, -1vh, 60px) rotateX(0) rotateY(0) scale(1.05);
+    }
+    100% {
+      opacity: 0.92;
+      transform: translate3d(0, -3vh, 360px) rotateX(0) rotateY(0) scale(1.58);
+    }
   }
 
-  .opening-stage.opening .opening-door-panel-left {
-    transform: rotateY(-112deg);
-  }
-
-  .opening-stage.opening .opening-door-panel-right {
-    transform: rotateY(112deg);
-  }
-
-  .opening-stage.opening .opening-doorway {
-    transform: scale(1.025);
-  }
-
-  .opening-florals {
-    position: absolute;
-    top: 3%;
-    left: 8%;
-    z-index: 4;
-    width: 84%;
-    height: 24%;
-    overflow: visible;
-    pointer-events: none;
-    transition: transform 0.8s ease, opacity 0.8s ease;
-  }
-
-  .opening-stage.opening .opening-florals {
-    transform: translateY(-10px);
-    opacity: 0.55;
+  @keyframes cardLightSweep {
+    to { left: 140%; }
   }
 
   .opening-instruction {
-    z-index: 6;
-    border: 1px solid rgba(185, 138, 85, 0.5);
+    position: absolute;
+    right: 16px;
+    bottom: 20px;
+    z-index: 5;
+    border: 1px solid rgba(255, 253, 248, 0.52);
     border-radius: 999px;
-    padding: 12px 22px;
-    color: var(--burgundy-deep);
-    background: rgba(255, 253, 248, 0.7);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    padding: 9px 13px;
+    color: rgba(255, 253, 248, 0.9);
+    background: rgba(16, 58, 61, 0.22);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    letter-spacing: 1.5px;
     cursor: pointer;
-    animation: ringPulse 2.2s infinite;
-  }
-
-  @keyframes ringPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(24, 86, 90, 0.12); }
-    70% { box-shadow: 0 0 0 12px rgba(24, 86, 90, 0); }
   }
 
   @media (max-height: 650px) {
-    .opening-stage { gap: 12px; padding: 18px; }
-    .opening-doorway { height: min(48vh, 310px); min-height: 240px; }
+    .opening-stage { gap: 8px; padding: 16px; }
+    .cinematic-scene { height: 58vh; min-height: 250px; }
+    .cinematic-card { height: 48vh; min-height: 230px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .opening-instruction { animation: none; }
     .opening-stage,
-    .opening-doorway,
-    .opening-door-panel,
-    .opening-reveal,
-    .opening-florals { transition-duration: 0.01ms; }
+    .cinematic-card { transition-duration: 0.01ms; }
   }
 
   /* ================= 2. HERO GOLD ARCH SECTION ================= */
@@ -1250,41 +1233,49 @@
     </svg>
   </div>
 
-  <!-- 1. FLORAL DOORWAY OPENING -->
-  <div class="opening-stage" id="openingStage">
-    <p class="opening-kicker">Deeksha &amp; Prashant &bull; 10 February 2027</p>
+  <!-- 1. CINEMATIC INVITATION REVEAL -->
+  <div class="opening-stage" id="openingStage" aria-label="Wedding invitation opening">
+    <p class="opening-kicker">A celebration begins</p>
 
-    <div class="opening-doorway" aria-hidden="true">
-      <div class="opening-door-light">
-        <div class="opening-reveal">
-          <div class="opening-reveal-mark">ॐ</div>
-          <div class="opening-reveal-names">Deeksha<br>&amp; Prashant</div>
-          <div class="opening-reveal-subtitle">A garden of blessings</div>
+    <div class="cinematic-scene">
+      <div class="cinematic-card" id="cinematicCard">
+        <svg class="cinematic-art" viewBox="0 0 280 390" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="cardPaper" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#FFFDF8"/>
+              <stop offset="100%" stop-color="#E9E0CE"/>
+            </linearGradient>
+            <linearGradient id="archGlass" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D8E6DA"/>
+              <stop offset="100%" stop-color="#A7C2B1"/>
+            </linearGradient>
+          </defs>
+          <rect width="280" height="390" fill="url(#cardPaper)"/>
+          <path d="M39 352V165a101 101 0 0 1 202 0v187" fill="url(#archGlass)" stroke="#B98A55" stroke-width="2"/>
+          <path d="M54 352V166a86 86 0 0 1 172 0v186" fill="none" stroke="#FFFDF8" stroke-width="3" opacity=".8"/>
+          <path d="M36 324c28-16 38-42 45-68m163 68c-28-16-38-42-45-68" fill="none" stroke="#65836F" stroke-width="2"/>
+          <g fill="#719477">
+            <path d="M58 289c-19-4-25-16-25-26 14 1 25 9 25 26m16-36c-18-6-21-19-19-28 14 4 22 14 19 28m132 36c19-4 25-16 25-26-14 1-25 9-25 26m-16-36c18-6 21-19 19-28-14 4-22 14-19 28"/>
+          </g>
+          <g fill="#D98E92">
+            <circle cx="34" cy="256" r="5"/><circle cx="42" cy="250" r="5"/><circle cx="48" cy="258" r="5"/><circle cx="40" cy="264" r="5"/>
+            <circle cx="246" cy="256" r="5"/><circle cx="238" cy="250" r="5"/><circle cx="232" cy="258" r="5"/><circle cx="240" cy="264" r="5"/>
+          </g>
+          <g fill="none" stroke="#B98A55" stroke-width="1" opacity=".65">
+            <path d="M20 30h32m-16-16v32M228 30h32m-16-16v32"/>
+            <circle cx="36" cy="30" r="12"/><circle cx="244" cy="30" r="12"/>
+          </g>
+        </svg>
+        <div class="cinematic-card-content">
+          <div class="cinematic-mark">ॐ</div>
+          <div class="cinematic-overline">Together with their families</div>
+          <div class="cinematic-names">Deeksha<br><span>&amp;</span><br>Prashant</div>
+          <div class="cinematic-date">10 February 2027 &bull; Kotdwar</div>
         </div>
       </div>
-
-      <div class="opening-doors">
-        <div class="opening-door-panel opening-door-panel-left"></div>
-        <div class="opening-door-panel opening-door-panel-right"></div>
-      </div>
-
-      <svg class="opening-florals" viewBox="0 0 300 110" preserveAspectRatio="xMidYMid meet">
-        <path d="M12 102 C45 82 44 47 82 34 C107 25 120 30 143 5 M288 102 C255 82 256 47 218 34 C193 25 180 30 157 5"
-              fill="none" stroke="#B98A55" stroke-width="2"/>
-        <path d="M49 73 C29 63 26 49 29 40 C43 43 53 53 49 73 M75 45 C57 34 58 22 63 15 C76 22 82 32 75 45 M251 73 C271 63 274 49 271 40 C257 43 247 53 251 73 M225 45 C243 34 242 22 237 15 C224 22 218 32 225 45"
-              fill="#79957D"/>
-        <g fill="#D98E92">
-          <circle cx="30" cy="35" r="5"/><circle cx="36" cy="29" r="5"/><circle cx="42" cy="35" r="5"/><circle cx="36" cy="41" r="5"/>
-          <circle cx="264" cy="35" r="5"/><circle cx="270" cy="29" r="5"/><circle cx="276" cy="35" r="5"/><circle cx="270" cy="41" r="5"/>
-        </g>
-        <g fill="#E6C98B">
-          <circle cx="36" cy="35" r="2.5"/><circle cx="270" cy="35" r="2.5"/>
-          <circle cx="111" cy="20" r="3"/><circle cx="189" cy="20" r="3"/>
-        </g>
-      </svg>
     </div>
 
-    <button class="opening-instruction" type="button" onclick="openInvitation()">Tap to open the invitation</button>
+    <button class="opening-instruction" type="button" onclick="finishOpening()">Skip intro</button>
   </div>
 
   <!-- 2. HERO ARCH WITH TYPEWRITER NAMES & BLURRED ZOOMING BACKDROP -->
@@ -1525,23 +1516,37 @@
 </div>
 
 <script>
-  /* ================= 1. DOORWAY OPEN & TYPEWRITER HERO SEQUENCE ================= */
+  /* ================= 1. CINEMATIC INTRO & TYPEWRITER HERO SEQUENCE ================= */
   let invitationOpened = false;
 
-  function openInvitation() {
+  function finishOpening() {
     if (invitationOpened) return;
     invitationOpened = true;
     const stage = document.getElementById('openingStage');
-    stage.classList.add('opening');
-    setTimeout(() => {
-      function onOpeningFade(event) {
-        if (event.target !== stage || event.propertyName !== 'opacity') return;
-        stage.removeEventListener('transitionend', onOpeningFade);
-        startHeroTypewriter();
-      }
-      stage.addEventListener('transitionend', onOpeningFade);
-      stage.classList.add('hidden');
-    }, 950);
+    function onOpeningFade(event) {
+      if (event.target !== stage || event.propertyName !== 'opacity') return;
+      stage.removeEventListener('transitionend', onOpeningFade);
+      document.body.classList.remove('opening-active');
+      startHeroTypewriter();
+    }
+    stage.addEventListener('transitionend', onOpeningFade);
+    stage.classList.add('hidden');
+  }
+
+  function startOpeningScene() {
+    const stage = document.getElementById('openingStage');
+    const card = document.getElementById('cinematicCard');
+    document.body.classList.add('opening-active');
+    card.addEventListener('animationend', event => {
+      if (event.target === card && event.animationName === 'cardApproach') finishOpening();
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      finishOpening();
+      return;
+    }
+
+    requestAnimationFrame(() => stage.classList.add('playing'));
   }
 
   function typeText(elementId, cursorId, text, speed, callback) {
@@ -1926,6 +1931,8 @@
     a.click();
     document.body.removeChild(a);
   }
+
+  startOpeningScene();
 </script>
 </body>
 </html>
