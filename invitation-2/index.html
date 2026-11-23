@@ -16,7 +16,7 @@
 <title>Deeksha & Prashant — Wedding Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --burgundy: #6D1426;
@@ -119,52 +119,73 @@
     z-index: 1;
     overflow: hidden;
     opacity: 0;
-    transform: scale(1.09);
-    transition: opacity 1.15s ease 0.7s, transform 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
+    transform: scale(1.035);
+    transition: opacity 1.35s ease, transform 3.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .room-scene::after {
-    content: "";
+  .door-open-scene {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(48, 26, 22, 0.08), transparent 35%, rgba(35, 18, 19, 0.3));
-    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(1.025);
+    transition: opacity 2.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s, transform 3.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
   }
 
-  .opening-stage.opening .room-scene {
+  .opening-stage.opening .door-open-scene {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .opening-stage.room-revealed .door-open-scene {
+    opacity: 0;
+    transform: scale(1.025);
+    transition-duration: 1.35s;
+    transition-delay: 0s;
+  }
+
+  .opening-stage.room-revealed .room-scene {
     opacity: 1;
     transform: scale(1);
   }
 
   .cover-photo {
-    z-index: 2;
-    transition: opacity 1.05s ease 0.82s, transform 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+    z-index: 3;
+    transition: opacity 1.65s ease 1.35s, transform 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
   }
 
   .opening-stage.opening .cover-photo {
     opacity: 0;
-    transform: scale(1.06);
+    transform: scale(1.035);
   }
 
   .door-leaf {
     position: absolute;
     inset: 0;
-    z-index: 3;
+    z-index: 4;
     width: 100%;
     height: 100%;
     overflow: visible;
     pointer-events: none;
     transform-style: preserve-3d;
+    transform-box: border-box;
     backface-visibility: hidden;
-    transition: transform 1.65s cubic-bezier(0.22, 0.8, 0.25, 1) 0.08s, opacity 0.7s ease 0.85s;
+    transition: transform 3.15s cubic-bezier(0.45, 0, 0.2, 1) 0.1s, opacity 0.65s ease 2.65s;
+  }
+
+  .door-leaf svg {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .door-leaf-left {
-    transform-origin: 28% 64%;
+    transform-origin: 29.5% 72%;
   }
 
   .door-leaf-right {
-    transform-origin: 79% 64%;
+    transform-origin: 72.5% 72%;
   }
 
   .opening-stage.opening .door-leaf-left {
@@ -177,26 +198,13 @@
     transform: rotateY(108deg);
   }
 
-  .cover-shade {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    background: linear-gradient(180deg, rgba(51, 24, 21, 0.05) 22%, rgba(49, 18, 27, 0.16) 52%, rgba(39, 12, 21, 0.42) 100%);
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-  }
-
-  .opening-stage.opening .cover-shade {
-    opacity: 0;
-  }
-
   .cover-content {
     position: absolute;
     inset: 0;
-    z-index: 5;
+    z-index: 6;
     pointer-events: none;
     opacity: 1;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.5s ease;
   }
 
   .opening-stage.opening .cover-content {
@@ -205,114 +213,76 @@
 
   .cover-title {
     position: absolute;
-    top: 50%;
+    top: 58%;
     left: 50%;
-    min-width: min(78%, 310px);
     transform: translate(-50%, -50%);
-    padding: 12px 22px 15px;
-    border: 1px solid rgba(200, 155, 84, 0.82);
-    border-radius: 4px;
-    background: rgba(253, 247, 239, 0.9);
-    box-shadow: 0 12px 36px rgba(38, 18, 14, 0.22), inset 0 0 0 4px rgba(255, 255, 255, 0.52);
-    color: var(--burgundy);
-    font-family: 'Cinzel Decorative', 'Cormorant Garamond', serif;
-    font-size: clamp(20px, 6vw, 29px);
+    width: 76%;
+    color: #123F67;
+    font-family: 'Great Vibes', 'Cormorant Garamond', serif;
+    font-size: clamp(43px, 12vw, 66px);
     font-weight: 400;
-    letter-spacing: 1.6px;
+    line-height: 0.88;
     text-align: center;
-    text-shadow: 0 1px 0 #fff;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.32), 0 2px 5px rgba(7, 42, 69, 0.22);
   }
 
   .cover-open-button {
     position: absolute;
-    top: 62%;
+    top: 69%;
     left: 50%;
     transform: translateX(-50%);
-    min-width: 205px;
-    padding: 12px 22px;
-    border: 1px solid rgba(229, 193, 123, 0.95);
-    border-radius: 999px;
-    color: #FFF8EE;
-    background: rgba(74, 11, 24, 0.86);
-    box-shadow: 0 8px 26px rgba(38, 18, 14, 0.28);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 9px;
+    padding: 8px 14px;
+    border: 0;
+    color: #123F67;
+    background: transparent;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(20px, 5.8vw, 27px);
+    font-style: italic;
     font-weight: 600;
-    letter-spacing: 2.1px;
-    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.62), 0 1px 4px rgba(7, 42, 69, 0.16);
     pointer-events: auto;
     cursor: pointer;
     animation: invitationPulse 2.2s ease-in-out infinite;
   }
 
-  .cover-open-button::before,
-  .cover-open-button::after {
-    content: "✦";
-    margin: 0 9px;
-    color: var(--gold-bright);
-  }
-
   @keyframes invitationPulse {
-    0%, 100% { box-shadow: 0 8px 26px rgba(38, 18, 14, 0.28), 0 0 0 0 rgba(229, 193, 123, 0.32); }
-    65% { box-shadow: 0 8px 26px rgba(38, 18, 14, 0.28), 0 0 0 10px rgba(229, 193, 123, 0); }
+    0%, 100% { opacity: 0.82; }
+    50% { opacity: 1; }
   }
 
   .room-message {
     position: absolute;
-    top: 19%;
+    top: 39%;
     left: 50%;
-    z-index: 3;
-    width: min(88%, 360px);
-    padding: 17px 18px 15px;
-    border: 1px solid rgba(200, 155, 84, 0.78);
-    border-radius: 18px;
-    background: rgba(253, 247, 239, 0.88);
-    box-shadow: 0 14px 38px rgba(43, 25, 17, 0.18), inset 0 0 0 4px rgba(255, 255, 255, 0.36);
-    color: var(--burgundy);
+    z-index: 5;
+    width: min(92%, 390px);
     text-align: center;
     opacity: 0;
-    transform: translate(-50%, 14px) scale(0.97);
-    transition: opacity 0.8s ease 1.35s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.35s;
+    transform: translate(-50%, 10px);
+    transition: opacity 0.9s ease 0.75s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.75s;
   }
 
-  .opening-stage.opening .room-message {
+  .opening-stage.room-revealed .room-message {
     opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
-
-  .room-ornament {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 13px;
-    margin-bottom: 4px;
-    color: var(--gold-dark);
-    font-size: 15px;
-  }
-
-  .room-ornament span:nth-child(2) {
-    font-size: 24px;
-    filter: drop-shadow(0 2px 3px rgba(109, 20, 38, 0.16));
-    animation: heartGlow 1.8s ease-in-out infinite;
-  }
-
-  @keyframes heartGlow {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.14); }
+    transform: translate(-50%, 0);
   }
 
   .room-message-text {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(25px, 7vw, 34px);
-    font-style: italic;
-    font-weight: 600;
-    line-height: 1.05;
+    color: #FFF8EA;
+    font-family: 'Great Vibes', 'Cormorant Garamond', serif;
+    font-size: clamp(41px, 11vw, 57px);
+    font-weight: 400;
+    line-height: 0.95;
+    text-shadow: 0 2px 3px rgba(20, 36, 43, 0.72), 0 5px 16px rgba(20, 36, 43, 0.62);
   }
 
   .room-message-sparkles {
-    margin-top: 7px;
-    font-size: 17px;
-    letter-spacing: 7px;
+    margin-top: 6px;
+    color: #FFF8EA;
+    font-size: 21px;
+    letter-spacing: 6px;
+    filter: drop-shadow(0 2px 5px rgba(20, 36, 43, 0.62));
   }
 
   .opening-scroll-cue {
@@ -320,7 +290,7 @@
     right: 0;
     bottom: max(24px, env(safe-area-inset-bottom));
     left: 0;
-    z-index: 4;
+    z-index: 7;
     color: #FFF8EE;
     font-family: 'Montserrat', sans-serif;
     font-size: 9px;
@@ -331,10 +301,10 @@
     text-transform: uppercase;
     opacity: 0;
     transform: translateY(7px);
-    transition: opacity 0.7s ease 1.7s, transform 0.7s ease 1.7s;
+    transition: opacity 0.8s ease 0.85s, transform 0.8s ease 0.85s;
   }
 
-  .opening-stage.opening .opening-scroll-cue {
+  .opening-stage.room-revealed .opening-scroll-cue {
     opacity: 1;
     transform: translateY(0);
   }
@@ -352,21 +322,19 @@
   }
 
   @media (max-height: 620px) {
-    .cover-title { top: 47%; }
-    .cover-open-button { top: 61%; }
-    .room-message { top: 13%; padding: 12px 16px; }
+    .cover-title { top: 57%; }
+    .cover-open-button { top: 68%; }
+    .room-message { top: 34%; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .room-scene,
+    .door-open-scene,
     .cover-photo,
     .door-leaf,
-    .cover-shade,
     .cover-content,
     .room-message,
     .opening-scroll-cue { transition-duration: 0.01ms; transition-delay: 0ms; }
-    .cover-open-button,
-    .room-ornament span:nth-child(2),
     .opening-scroll-cue span { animation: none; }
   }
 
@@ -1236,36 +1204,42 @@
     <img class="opening-photo" src="1795447129250.jpg" alt="">
   </div>
 
+  <div class="door-open-scene" aria-hidden="true">
+    <img class="opening-photo" src="1795448505114.png" alt="">
+  </div>
+
   <img class="opening-photo cover-photo" src="1795446932855.png" alt="Flower-covered turquoise doors">
 
-  <svg class="door-leaf door-leaf-left" viewBox="0 0 768 1376" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <clipPath id="leftDoorClip" clipPathUnits="userSpaceOnUse">
-        <path d="M225 1292V704C225 596 293 522 384 516V1292Z"/>
-      </clipPath>
-    </defs>
-    <image href="1795446932855.png" x="0" y="0" width="768" height="1376" clip-path="url(#leftDoorClip)"/>
-  </svg>
+  <div class="door-leaf door-leaf-left" aria-hidden="true">
+    <svg viewBox="0 0 768 1376" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <clipPath id="leftDoorClip" clipPathUnits="userSpaceOnUse">
+          <path d="M226 1288V690C226 607 291 550 394 544V1288Z"/>
+        </clipPath>
+      </defs>
+      <image href="1795446932855.png" x="0" y="0" width="768" height="1376" clip-path="url(#leftDoorClip)"/>
+    </svg>
+  </div>
 
-  <svg class="door-leaf door-leaf-right" viewBox="0 0 768 1376" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <clipPath id="rightDoorClip" clipPathUnits="userSpaceOnUse">
-        <path d="M384 516C475 522 543 596 543 704V1292H384Z"/>
-      </clipPath>
-    </defs>
-    <image href="1795446932855.png" x="0" y="0" width="768" height="1376" clip-path="url(#rightDoorClip)"/>
-  </svg>
+  <div class="door-leaf door-leaf-right" aria-hidden="true">
+    <svg viewBox="0 0 768 1376" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <clipPath id="rightDoorClip" clipPathUnits="userSpaceOnUse">
+          <path d="M394 544C491 550 557 607 557 690V1288H394Z"/>
+        </clipPath>
+      </defs>
+      <image href="1795446932855.png" x="0" y="0" width="768" height="1376" clip-path="url(#rightDoorClip)"/>
+    </svg>
+  </div>
 
-  <div class="cover-shade" aria-hidden="true"></div>
   <div class="cover-content">
-    <h1 class="cover-title">You&rsquo;re Invited</h1>
-    <button class="cover-open-button" type="button" onclick="openInvitation()">Tap to Open</button>
+    <h1 class="cover-title">You&rsquo;re<br>Invited</h1>
+    <button class="cover-open-button" type="button" onclick="openInvitation()">Tap to open &rarr;</button>
   </div>
 
   <div class="room-message">
-    <div class="room-ornament" aria-hidden="true"><span>✦</span><span>💞</span><span>✦</span></div>
-    <p class="room-message-text">We are getting together</p>
-    <div class="room-message-sparkles" aria-hidden="true">🪷 &nbsp; ✨ &nbsp; 💖</div>
+    <p class="room-message-text">We are getting<br>married</p>
+    <div class="room-message-sparkles" aria-hidden="true">💞 &nbsp; 💍 &nbsp; ✨</div>
   </div>
 
   <div class="opening-scroll-cue">Scroll down to continue<span>&darr;</span></div>
@@ -1568,12 +1542,34 @@
     stage.classList.add('opening');
     stage.querySelector('.cover-open-button').disabled = true;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.setTimeout(() => stage.classList.add('room-revealed'), reducedMotion ? 50 : 3350);
     window.setTimeout(() => {
       document.documentElement.classList.remove('intro-locked');
       document.body.classList.remove('intro-locked');
       startHeroTypewriter();
-    }, reducedMotion ? 50 : 2450);
+    }, reducedMotion ? 100 : 5600);
   }
+
+  function alignDoorLeaves() {
+    const stage = document.getElementById('openingStage');
+    const cover = stage.querySelector('.cover-photo');
+    if (!cover.naturalWidth || !cover.naturalHeight) return;
+
+    const scale = Math.max(stage.clientWidth / cover.naturalWidth, stage.clientHeight / cover.naturalHeight);
+    const horizontalCrop = (cover.naturalWidth * scale - stage.clientWidth) / 2;
+    const verticalCrop = (cover.naturalHeight * scale - stage.clientHeight) / 2;
+    const hingeY = (989 * scale - verticalCrop) / stage.clientHeight * 100;
+    const leftHingeX = (226 * scale - horizontalCrop) / stage.clientWidth * 100;
+    const rightHingeX = (557 * scale - horizontalCrop) / stage.clientWidth * 100;
+
+    stage.querySelector('.door-leaf-left').style.transformOrigin = `${leftHingeX}% ${hingeY}%`;
+    stage.querySelector('.door-leaf-right').style.transformOrigin = `${rightHingeX}% ${hingeY}%`;
+  }
+
+  const coverPhoto = document.querySelector('.cover-photo');
+  coverPhoto.addEventListener('load', alignDoorLeaves);
+  window.addEventListener('resize', alignDoorLeaves);
+  if (coverPhoto.complete) alignDoorLeaves();
 
   function typeText(elementId, cursorId, text, speed, callback) {
     const el = document.getElementById(elementId);
