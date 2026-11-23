@@ -1422,8 +1422,13 @@
     const stage = document.getElementById('bookStage');
     stage.classList.add('opening');
     setTimeout(() => {
+      function onCoverFade(event) {
+        if (event.target !== stage || event.propertyName !== 'opacity') return;
+        stage.removeEventListener('transitionend', onCoverFade);
+        startHeroTypewriter();
+      }
+      stage.addEventListener('transitionend', onCoverFade);
       stage.classList.add('hidden');
-      startHeroTypewriter();
     }, 950);
   }
 
