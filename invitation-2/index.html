@@ -129,6 +129,31 @@
     height: 100%;
   }
 
+  .terrace-art .scene-mountains,
+  .terrace-art .scene-water,
+  .terrace-art .scene-open-shutters,
+  .terrace-art .scene-foreground {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 2.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #cinematic-opening.is-opening .terrace-art .scene-mountains {
+    transform: scale(1.08) translateY(1%);
+  }
+
+  #cinematic-opening.is-opening .terrace-art .scene-water {
+    transform: scale(1.12) translateY(2%);
+  }
+
+  #cinematic-opening.is-opening .terrace-art .scene-open-shutters {
+    transform: scale(1.035);
+  }
+
+  #cinematic-opening.is-opening .terrace-art .scene-foreground {
+    transform: scale(1.08) translateY(3%);
+  }
+
   .scene-interior::after {
     content: "";
     position: absolute;
@@ -236,27 +261,21 @@
     height: min(74dvh, 540px);
     overflow: visible;
     border-radius: 180px 180px 12px 12px;
-    background: linear-gradient(145deg, #eadbc6, #c8b49a);
+    background: linear-gradient(145deg, #f1e5d2 0%, #d7c3a9 48%, #c4ad91 100%);
     box-shadow: 0 0 0 100vmax #f7f2eb, inset 0 0 28px rgba(0, 0, 0, 0.35);
     transform-style: preserve-3d;
   }
 
   .floral-crown {
     position: absolute;
-    top: -34px;
-    left: -18px;
-    right: -18px;
+    top: -58px;
+    left: -24px;
     z-index: 5;
-    height: 86px;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 20% 55%, #e84a3c 0 18px, transparent 20px),
-      radial-gradient(circle at 38% 35%, #ff6b5b 0 22px, transparent 24px),
-      radial-gradient(circle at 55% 28%, #d93829 0 24px, transparent 26px),
-      radial-gradient(circle at 74% 40%, #ff7666 0 20px, transparent 22px),
-      radial-gradient(circle at 86% 62%, #c92e20 0 16px, transparent 18px),
-      radial-gradient(circle at 48% 50%, #3d6b35 0 36px, transparent 38px);
+    width: calc(100% + 48px);
+    height: 174px;
+    overflow: visible;
     pointer-events: none;
+    filter: drop-shadow(0 4px 5px rgba(44, 49, 31, 0.2));
   }
 
   .arch-door {
@@ -264,7 +283,9 @@
     width: 50%;
     height: 100%;
     border: 2px solid #23536b;
-    background: linear-gradient(180deg, #4fa3c7 0%, #347fa1 55%, #245f7a 100%);
+    background:
+      linear-gradient(90deg, rgba(255,255,255,0.12), transparent 18% 82%, rgba(0,0,0,0.12)),
+      linear-gradient(180deg, #42a8ce 0%, #2886ae 55%, #176588 100%);
     box-shadow: inset 0 0 18px rgba(10, 32, 44, 0.35);
     transition: transform 1.6s cubic-bezier(0.25, 1, 0.35, 1);
     backface-visibility: hidden;
@@ -368,6 +389,10 @@
     .hero-reveal,
     .arch-stage,
     .arch-door,
+    .terrace-art .scene-mountains,
+    .terrace-art .scene-water,
+    .terrace-art .scene-open-shutters,
+    .terrace-art .scene-foreground,
     .door-badge { transition-duration: 0.01ms; transition-delay: 0ms; }
     .opening-scroll-cue { animation: none; }
   }
@@ -1235,40 +1260,133 @@
 
 <section id="cinematic-opening" aria-label="Wedding invitation opening scene">
   <div class="scene-interior">
-    <svg class="terrace-art" viewBox="0 0 1200 1600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg class="terrace-art" viewBox="0 0 1000 1400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
-        <linearGradient id="terraceSky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#f8cda3"/>
-          <stop offset="48%" stop-color="#efaa83"/>
-          <stop offset="100%" stop-color="#647c9d"/>
+        <linearGradient id="introWall" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f8eedc"/>
+          <stop offset="55%" stop-color="#dfc8a9"/>
+          <stop offset="100%" stop-color="#b99577"/>
         </linearGradient>
-        <linearGradient id="terraceFloor" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#c5a58b"/>
-          <stop offset="100%" stop-color="#654f4e"/>
+        <linearGradient id="introSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8ec8e6"/>
+          <stop offset="52%" stop-color="#d9e8dc"/>
+          <stop offset="100%" stop-color="#f5d6ab"/>
         </linearGradient>
-        <linearGradient id="terraceWater" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#6e9aab"/>
-          <stop offset="100%" stop-color="#344b68"/>
+        <linearGradient id="introLake" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#72b4c6"/>
+          <stop offset="100%" stop-color="#397a91"/>
         </linearGradient>
+        <linearGradient id="introFloor" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c1a17f"/>
+          <stop offset="100%" stop-color="#80614d"/>
+        </linearGradient>
+        <linearGradient id="introDoorGlass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#e6f4ec" stop-opacity=".75"/>
+          <stop offset="100%" stop-color="#8ec3d0" stop-opacity=".42"/>
+        </linearGradient>
+        <clipPath id="introWindowClip">
+          <path d="M206 980V565a294 294 0 0 1 588 0v415Z"/>
+        </clipPath>
+        <g id="introFlower">
+          <circle cx="0" cy="-9" r="7" fill="#e98786"/>
+          <circle cx="8" cy="-3" r="7" fill="#d96c71"/>
+          <circle cx="5" cy="7" r="7" fill="#ee9b91"/>
+          <circle cx="-5" cy="7" r="7" fill="#d96c71"/>
+          <circle cx="-8" cy="-3" r="7" fill="#ee9b91"/>
+          <circle cx="0" cy="0" r="4" fill="#f5d28a"/>
+        </g>
       </defs>
-      <rect width="1200" height="1600" fill="url(#terraceSky)"/>
-      <circle cx="605" cy="480" r="152" fill="#ffe5b6" opacity=".82"/>
-      <path d="M0 790 190 590l156 146 169-245 215 247 174-192 296 254v360H0Z" fill="#677590" opacity=".82"/>
-      <path d="m0 895 221-173 187 179 231-251 197 225 180-173 183 158v350H0Z" fill="#394e67" opacity=".84"/>
-      <path d="M0 940q280-75 600 0t600 0v236H0Z" fill="url(#terraceWater)" opacity=".86"/>
-      <path d="M0 1018q250-24 510 0t690-3" fill="none" stroke="#f8d3a2" stroke-width="8" opacity=".45"/>
-      <path d="M0 1090q320-21 610 2t590-4" fill="none" stroke="#f8d3a2" stroke-width="5" opacity=".3"/>
-      <path d="M0 1175h1200v425H0Z" fill="url(#terraceFloor)"/>
-      <path d="M0 1192h1200M0 1300h1200M0 1430h1200" stroke="#ead2b1" stroke-width="5" opacity=".36"/>
-      <path d="M0 1190 330 1600M1200 1190 870 1600M360 1190l-80 410M840 1190l80 410" stroke="#ead2b1" stroke-width="4" opacity=".3"/>
-      <path d="M0 1150h1200" stroke="#e8c99e" stroke-width="24" opacity=".8"/>
-      <path d="M0 1070h1200v32H0Z" fill="#e1c39b"/>
-      <path d="M44 1102v74m126-74v74m126-74v74m126-74v74m126-74v74m126-74v74m126-74v74m126-74v74m126-74v74m126-74v74"
-            stroke="#e1c39b" stroke-width="14"/>
-      <path d="M0 1176h1200" stroke="#b48b69" stroke-width="18"/>
-      <g fill="#385a49">
-        <path d="M-25 1120q18-190 76-222 59 32 76 222Z"/>
-        <path d="M1070 1118q18-197 77-231 59 34 78 231Z"/>
+
+      <rect width="1000" height="1400" fill="url(#introWall)"/>
+      <path d="M0 1040h1000v360H0Z" fill="url(#introFloor)"/>
+      <path d="M0 1044h1000M0 1090h1000" stroke="#f7e6cb" stroke-width="9" opacity=".62"/>
+      <path d="M0 1125h1000M0 1280h1000" stroke="#5d4639" stroke-width="3" opacity=".18"/>
+
+      <g class="scene-room-depth" fill="none" stroke="#a98158">
+        <path d="M35 0v1038M965 0v1038" stroke-width="12" opacity=".48"/>
+        <path d="M65 70h210v320H65zM725 70h210v320H725z" stroke-width="3" opacity=".4"/>
+        <path d="M83 88h174v284H83zM743 88h174v284H743z" stroke-width="2" opacity=".28"/>
+        <path d="M0 430h188M812 430h188" stroke-width="9" opacity=".34"/>
+        <path d="M0 450h170M830 450h170" stroke-width="3" opacity=".35"/>
+        <path d="M275 105h450M290 124h420" stroke-width="3" opacity=".28"/>
+      </g>
+
+      <g class="scene-mountains" clip-path="url(#introWindowClip)">
+        <rect x="180" y="250" width="640" height="760" fill="url(#introSky)"/>
+        <path d="M190 700 300 560l78 82 110-201 132 191 84-108 126 167v170H190Z" fill="#8ca5a5"/>
+        <path d="m190 755 154-161 84 100 126-176 112 149 88-100 176 172v135H190Z" fill="#617e87"/>
+        <path d="m272 622 106-181 66 96-58-34-37 33-27-18Z" fill="#f4eee0" opacity=".9"/>
+        <path d="m539 520 126 147-77-49-33 22-46-32-37 22Z" fill="#f7f0e2" opacity=".85"/>
+        <path d="M205 740q160-45 295 0t320-2v65H205Z" fill="#486d76" opacity=".74"/>
+        <g fill="#e7d4b8" opacity=".82">
+          <path d="m295 742 12-29 12 29Zm30 2 15-38 15 38Zm44-4 12-31 13 31Zm280-4 13-34 14 34Zm38 5 15-39 16 39Zm42-1 12-30 12 30Z"/>
+        </g>
+      </g>
+
+      <g class="scene-water" clip-path="url(#introWindowClip)">
+        <path d="M195 758q160-25 312 0t318 0v245H195Z" fill="url(#introLake)"/>
+        <path d="M208 805q180-17 332 0t276 0M205 857q166-11 324 0t289 0M205 914q180-12 335 0t277 0"
+              fill="none" stroke="#d7e8d9" stroke-width="5" opacity=".45"/>
+        <path d="M262 777h465" stroke="#f8e5c4" stroke-width="4" opacity=".58"/>
+      </g>
+
+      <g class="scene-open-shutters">
+        <path d="M209 524 104 448v500l105 40Z" fill="url(#introDoorGlass)" stroke="#f7ebd8" stroke-width="13"/>
+        <path d="m195 560-67-49v391l67 25Z" fill="none" stroke="#9e7957" stroke-width="7" opacity=".75"/>
+        <path d="m179 590-34-25v99l34 13Z" fill="none" stroke="#f8f0df" stroke-width="5"/>
+        <path d="m179 712-34-13v121l34 11Z" fill="none" stroke="#f8f0df" stroke-width="5"/>
+        <path d="m791 524 105-76v500l-105 40Z" fill="url(#introDoorGlass)" stroke="#f7ebd8" stroke-width="13"/>
+        <path d="m805 560 67-49v391l-67 25Z" fill="none" stroke="#9e7957" stroke-width="7" opacity=".75"/>
+        <path d="m821 590 34-25v99l-34 13Z" fill="none" stroke="#f8f0df" stroke-width="5"/>
+        <path d="m821 712 34-13v121l-34 11Z" fill="none" stroke="#f8f0df" stroke-width="5"/>
+      </g>
+
+      <g class="scene-room-depth">
+        <path d="M171 1004V560a329 329 0 0 1 658 0v444" fill="none" stroke="#f7ead5" stroke-width="33"/>
+        <path d="M188 1003V560a312 312 0 0 1 624 0v443" fill="none" stroke="#bd986d" stroke-width="7"/>
+        <path d="M226 992h548" stroke="#bd986d" stroke-width="12"/>
+        <path d="M248 1004h504" stroke="#f2dfc2" stroke-width="8"/>
+        <path d="M212 500a288 288 0 0 1 576 0" fill="none" stroke="#fff4e2" stroke-width="7" opacity=".82"/>
+        <path d="M275 1050q225 28 450 0" fill="none" stroke="#8f6849" stroke-width="5" opacity=".55"/>
+      </g>
+
+      <g class="scene-foreground">
+        <path d="M80 1102q0-61 57-61h114q54 0 54 61v116H80Z" fill="#e9ddc9"/>
+        <path d="M91 1107q0-38 40-38h124q36 0 36 38v60H91Z" fill="#f5ead8"/>
+        <path d="M79 1178h230v73H79q-22 0-22-22v-28q0-23 22-23Z" fill="#c6ad90"/>
+        <path d="M920 1102q0-61-57-61H749q-54 0-54 61v116h225Z" fill="#e9ddc9"/>
+        <path d="M909 1107q0-38-40-38H745q-36 0-36 38v60h200Z" fill="#f5ead8"/>
+        <path d="M921 1178H691v73h230q22 0 22-22v-28q0-23-22-23Z" fill="#c6ad90"/>
+        <path d="M286 1112q0-47 52-47h324q52 0 52 47v111H286Z" fill="#dfcfb8"/>
+        <path d="M301 1116q0-30 37-30h328q37 0 37 30v55H301Z" fill="#f3e8d7"/>
+        <path d="M282 1168h436v80q0 17-18 17H300q-18 0-18-17Z" fill="#c9b396"/>
+        <path d="M327 1265h346l73 135H254Z" fill="#b38c68" opacity=".38"/>
+        <path d="M391 1194q109-27 218 0l38 87H353Z" fill="#8f684d"/>
+        <ellipse cx="500" cy="1190" rx="133" ry="31" fill="#d4b18b"/>
+        <ellipse cx="500" cy="1186" rx="109" ry="22" fill="#ead4b3"/>
+        <path d="M500 1182v-66m0 42-38-31m38 24 42-36" fill="none" stroke="#58744d" stroke-width="8" stroke-linecap="round"/>
+        <g fill="#d98583">
+          <circle cx="461" cy="1124" r="16"/><circle cx="494" cy="1114" r="17"/><circle cx="530" cy="1122" r="16"/>
+          <circle cx="475" cy="1150" r="15"/><circle cx="516" cy="1148" r="17"/>
+        </g>
+        <g fill="#f0c77e">
+          <circle cx="461" cy="1124" r="5"/><circle cx="494" cy="1114" r="5"/><circle cx="530" cy="1122" r="5"/>
+          <circle cx="475" cy="1150" r="5"/><circle cx="516" cy="1148" r="5"/>
+        </g>
+        <path d="M160 982q15-35 47-35t47 35l-15 24h-65Z" fill="#a8784f"/>
+        <path d="M747 982q15-35 47-35t47 35l-15 24h-65Z" fill="#a8784f"/>
+        <g fill="#6f8b5e">
+          <ellipse cx="179" cy="955" rx="10" ry="24" transform="rotate(-35 179 955)"/>
+          <ellipse cx="205" cy="944" rx="10" ry="25" transform="rotate(18 205 944)"/>
+          <ellipse cx="227" cy="960" rx="9" ry="22" transform="rotate(42 227 960)"/>
+          <ellipse cx="767" cy="955" rx="10" ry="24" transform="rotate(35 767 955)"/>
+          <ellipse cx="793" cy="944" rx="10" ry="25" transform="rotate(-18 793 944)"/>
+          <ellipse cx="815" cy="960" rx="9" ry="22" transform="rotate(-42 815 960)"/>
+        </g>
+        <use href="#introFlower" transform="translate(181 935) scale(1.2)"/>
+        <use href="#introFlower" transform="translate(214 928) scale(1.1)"/>
+        <use href="#introFlower" transform="translate(790 935) scale(1.2)"/>
+        <use href="#introFlower" transform="translate(822 928) scale(1.1)"/>
       </g>
       <g fill="#d97869">
         <circle cx="68" cy="1050" r="20"/><circle cx="104" cy="1070" r="17"/><circle cx="1123" cy="1055" r="20"/><circle cx="1087" cy="1074" r="17"/>
@@ -1295,7 +1413,44 @@
 
   <button class="arch-stage" id="arch-trigger" type="button" aria-label="Tap to open the wedding doors" aria-pressed="false">
     <span class="arch-wall">
-      <span class="floral-crown"></span>
+      <svg class="floral-crown" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <g id="doorBlossom">
+            <circle cx="0" cy="-12" r="9" fill="#e8584e"/>
+            <circle cx="11" cy="-4" r="9" fill="#f16f60"/>
+            <circle cx="7" cy="9" r="9" fill="#d94338"/>
+            <circle cx="-7" cy="9" r="9" fill="#f16f60"/>
+            <circle cx="-11" cy="-4" r="9" fill="#d94338"/>
+            <circle cx="0" cy="0" r="4.5" fill="#f3cf83"/>
+          </g>
+        </defs>
+        <path d="M15 176C148 53 259 123 362 69S582 32 685 83s194 61 300-20" fill="none" stroke="#536f43" stroke-width="13" stroke-linecap="round"/>
+        <path d="M47 151c36-57 71-70 109-73m-49 90c22-46 48-69 83-80m139 13c28-42 61-61 100-64m126 11c30-36 65-48 103-45m87 65c41-30 76-39 112-33m41-19c23-12 43-27 64-45" fill="none" stroke="#71894e" stroke-width="8" stroke-linecap="round"/>
+        <g fill="#728d58">
+          <ellipse cx="93" cy="97" rx="13" ry="31" transform="rotate(-52 93 97)"/>
+          <ellipse cx="155" cy="107" rx="12" ry="30" transform="rotate(36 155 107)"/>
+          <ellipse cx="287" cy="102" rx="12" ry="31" transform="rotate(-39 287 102)"/>
+          <ellipse cx="410" cy="55" rx="12" ry="29" transform="rotate(48 410 55)"/>
+          <ellipse cx="555" cy="57" rx="12" ry="31" transform="rotate(-42 555 57)"/>
+          <ellipse cx="700" cy="102" rx="13" ry="30" transform="rotate(38 700 102)"/>
+          <ellipse cx="850" cy="84" rx="12" ry="31" transform="rotate(-45 850 84)"/>
+          <ellipse cx="946" cy="54" rx="13" ry="30" transform="rotate(44 946 54)"/>
+        </g>
+        <use href="#doorBlossom" transform="translate(45 144) scale(1.25)"/>
+        <use href="#doorBlossom" transform="translate(111 91) scale(1.55)"/>
+        <use href="#doorBlossom" transform="translate(181 112) scale(1.2)"/>
+        <use href="#doorBlossom" transform="translate(253 92) scale(1.45)"/>
+        <use href="#doorBlossom" transform="translate(328 75) scale(1.15)"/>
+        <use href="#doorBlossom" transform="translate(399 56) scale(1.5)"/>
+        <use href="#doorBlossom" transform="translate(473 47) scale(1.2)"/>
+        <use href="#doorBlossom" transform="translate(548 57) scale(1.55)"/>
+        <use href="#doorBlossom" transform="translate(621 77) scale(1.25)"/>
+        <use href="#doorBlossom" transform="translate(698 100) scale(1.5)"/>
+        <use href="#doorBlossom" transform="translate(769 102) scale(1.15)"/>
+        <use href="#doorBlossom" transform="translate(847 79) scale(1.5)"/>
+        <use href="#doorBlossom" transform="translate(925 55) scale(1.3)"/>
+        <use href="#doorBlossom" transform="translate(975 48) scale(1.45)"/>
+      </svg>
       <span class="arch-door arch-door-left"></span>
       <span class="arch-door arch-door-right"></span>
       <span class="door-badge">
